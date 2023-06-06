@@ -64,6 +64,37 @@ def create_symlink(source_path, target_path, replace_only=False):
         os.symlink(source_path, target_path)
 
 
+def check_file(full_path_source: str, full_path_target: str, verbose: bool) -> bool:
+    if not os.path.exists(full_path_target):
+        if verbose:
+            print('%s does not exist.' % (full_path_target,))
+        return False
+
+    if not os.path.islink(full_path_target):
+        if verbose:
+            print('%s exists but is not a symlink.' % (full_path_target,))
+        return False
+
+    current_symlink_target = os.readlink(full_path_target)
+    if current_symlink_target != full_path_source:
+        if verbose:
+            print(
+                '%s is a symlink, but points to %s. Expected %s'
+                % (full_path_target, current_symlink_target, full_path_source)
+            )
+        return False
+
+    if current_symlink_target == full_path_source:
+        if verbose:
+            print(
+                '%s is a symlink correctly pointing to %s'
+                % (full_path_target, full_path_source)
+            )
+        return True
+
+    return False
+
+
 def uninstall_file(full_path_source: str, full_path_target: str):
     if not os.path.exists(full_path_target):
         print('%s does not exist. Not uninstalling.' % (full_path_target,))
@@ -104,6 +135,11 @@ parser.add_argument(
     '-a', '--all', action='store_true', help='Install dotfiles for all apps'
 )
 parser.add_argument(
+    '--check',
+    action='store_true',
+    help='Check which dotfiles are already symlinked',
+)
+parser.add_argument(
     '--replace-only',
     action='store_true',
     help='Do not install new config files, only replace existing ones',
@@ -134,6 +170,10 @@ for app_dir in app_dirs:
     if not os.path.exists(dotfile_json_path):
         continue
 
+    if not args.check:
+        print(app_dir)
+
+    is_installed = True
     with open(dotfile_json_path) as dotfile:
         files = json.load(dotfile)
 
@@ -143,7 +183,11 @@ for app_dir in app_dirs:
                 full_path_target = parse_path(file['target'], path_app_dir)
                 assert os.path.exists(full_path_source)
 
-                if args.uninstall:
+                if args.check:
+                    is_installed = is_installed and check_file(
+                        full_path_source, full_path_target, verbose=False
+                    )
+                elif args.uninstall:
                     uninstall_file(full_path_source, full_path_target)
                 else:
                     create_symlink(
@@ -153,3 +197,9 @@ for app_dir in app_dirs:
                     )
             else:
                 print('Unknown type: ' + file['type'])
+
+    if args.check:
+        if is_installed:
+            print('✅ %s' % app_dir)
+        else:
+            print('❌ %s' % app_dir)
