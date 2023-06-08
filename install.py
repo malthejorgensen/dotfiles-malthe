@@ -131,6 +131,7 @@ def uninstall_file(full_path_source: str, full_path_target: str):
 
 
 parser = argparse.ArgumentParser()
+parser.add_argument('-v', '--verbose', action='count', default=0, dest='verbosity')
 parser.add_argument(
     '-a', '--all', action='store_true', help='Install dotfiles for all apps'
 )
@@ -185,7 +186,7 @@ for app_dir in app_dirs:
 
                 if args.check:
                     is_installed = is_installed and check_file(
-                        full_path_source, full_path_target, verbose=False
+                        full_path_source, full_path_target, verbose=args.verbosity > 0
                     )
                 elif args.uninstall:
                     uninstall_file(full_path_source, full_path_target)
