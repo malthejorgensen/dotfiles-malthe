@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./gitconfig",
+    "target": "~/.gitconfig"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./gitignore_global",
+    "target": "~/.gitignore_global"
+  }
+]

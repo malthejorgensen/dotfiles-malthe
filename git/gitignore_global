@@ -1,0 +1,21 @@
+#.DS_Store
+/.venv*
+
+#.idea/workspace.xml
+#backups/
+#.idea/
+#.bundle/
+#.DS_Store
+#.DS_Store?
+#.Spotlight-V100
+#.Trashes
+#Thumbs.db
+#ehthumbs.db
+#*.data
+
+# Python debugger config file
+.pdbrc
+
+# OS X folder config files
+.DS_Store
+

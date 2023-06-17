@@ -1,0 +1,40 @@
+[push]
+	default = current
+  # Quelch messages when local and tracked upstream
+  # have different names.
+  # See: http://stackoverflow.com/a/17045911/118608
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /Users/malthe/.gitignore_global
+	mergetool = sublime
+	# mergetool = gvimdiff
+[user]
+	email = malthe.jorgensen@gmail.com
+	name = Malthe Jørgensen
+[diff]
+	# tool = gvimdiff
+	tool = sublime
+	compactionHeuristic = true
+[merge]
+	# tool = gvimdiff
+	tool = sublime
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/malthe/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[mergetool "sublime"]
+	cmd = /usr/bin/env subl --new-window --wait \"$MERGED\"; git add \"$MERGED\"
+	trustExitCode = true
+[rerere]
+	enabled = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
