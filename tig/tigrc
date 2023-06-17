@@ -1,0 +1,13 @@
+# https://github.com/jonas/tig/wiki/Bindings
+bind generic k move-down
+bind generic l move-up
+bind generic K next
+bind generic L previous
+bind generic <Ctrl-F> move-page-down
+bind generic <Ctrl-B> move-page-up
+bind generic g move-first-line
+bind generic G move-last-line
+
+bind generic <Space> enter
+
+bind main e !git rebase -i %(commit)'~1'
