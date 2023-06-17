@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./fish_config",
+    "target": "~/.config/fish"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./fish_history",
+    "target": "~/.local/share/fish/fish_history"
+  }
+]
