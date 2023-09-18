@@ -174,11 +174,17 @@ function git-recent-branches
       # Only get 20 latest
       head -n20
 end
+function grp
+  git-recent-branches | fzf
+end
 function gr
-  git checkout (git-recent-branches | fzf)
+  git checkout (grp)
+end
+function gtp
+  git branch | sed -E 's/^.{2}//' | fzf
 end
 function gt
-  git checkout (git branch | sed -E 's/^.{2}//' | fzf)
+  git checkout (gtp)
 end
 
 
