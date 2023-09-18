@@ -1,1 +1,4 @@
+/aws/cli/cache/
+/aws/mfa-credentials-temp-*
+/aws/sso/cache/
 /vim/.vim/bundle/
