@@ -1,0 +1,45 @@
+{
+	"auto_find_in_selection": true,
+	"color_scheme": "Packages/Color Scheme - Legacy/Solarized (Light).tmTheme",
+	"draw_white_space": ["selection_all", "isolated_all", "trailing_all", "leading_tabs"],
+	"folder_exclude_patterns":
+	[
+		"node_modules",
+		"__pycache__",
+		".venv*",
+		".git",
+		".mypy_cache",
+		".pytest_cache",
+	],
+	"file_exclude_patterns":
+	[
+		".DS_Store",
+	],
+	"font_size": 10,
+	"ignored_packages":
+	[
+		"Better CoffeeScript",
+		"Elm Syntax Highlighting",
+		"FileDiffs",
+		"GitStatusBar",
+		"isort",
+		"Six",
+		"SublimeLinter-flake8",
+		// "Gitignored File Excluder" (https://github.com/ExplodingCabbage/sublime-gitignorer)
+		//   is the scourge of the earth. Never install this.
+		// "sublime-text-gitignore" (https://github.com/apc999/"sublime-text-gitignore")
+		//   might be okay (since works at the project level, and doesn't auto-update)
+		"Vintage",
+		"Vintageous",
+	],
+	"neovintageous_build_version": 11100,
+	"sublack.black_on_save": true,
+	"sublack.black_skip_string_normalization": true,
+	"tab_size": 2,
+	"theme": "Default.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": false,
+	"vintageous_use_ctrl_keys": true,
+	"vintageous_use_super_keys": false,
+	"word_wrap": false,
+}

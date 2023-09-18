@@ -1,0 +1,14 @@
+[
+  {"keys": ["j"], "command": "nv_feed_key", "args": {"key": "h"}, "context": [{"key": "vi_command_mode_aware"}]},
+  {"keys": ["k"], "command": "nv_feed_key", "args": {"key": "j"}, "context": [{"key": "vi_command_mode_aware"}]},
+  {"keys": ["l"], "command": "nv_feed_key", "args": {"key": "k"}, "context": [{"key": "vi_command_mode_aware"}]},
+  {"keys": [";"], "command": "nv_feed_key", "args": {"key": "l"}, "context": [{"key": "vi_command_mode_aware"}]},
+  {"keys": [":"], "command": "nv_feed_key", "args": {"key": "$"}, "context": [{"key": "vi_command_mode_aware"}]},
+  {"keys": ["J"], "command": "nv_feed_key", "args": {"key": "^"}, "context": [{"key": "vi_command_mode_aware"}]},
+  {"keys": ["\\"], "command": "nv_feed_key", "args": {"key": ":"}, "context": [{"key": "vi_command_mode_aware"}]},
+  {"keys": ["j", "j"], "command": "enter_normal_mode", "args": {"mode": "mode_insert"}, "context": [{"key": "vi_insert_mode_aware"}]},
+
+  // Normal next tab and previous tab keybindings (instead of "last visited tab")
+  {"keys": ["ctrl+tab"], "command": "next_view"},
+  {"keys": ["ctrl+shift+tab"], "command": "prev_view"}
+]

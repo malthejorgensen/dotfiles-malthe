@@ -1,0 +1,9 @@
+[submodule "Sublime Text/Base64"]
+	path = Sublime Text/Base64
+	url = git@github.com:malthejorgensen/subl-Base64.git
+[submodule "Sublime Text/ConvertCase"]
+	path = Sublime Text/ConvertCase
+	url = git@github.com:malthejorgensen/subl-ConvertCase.git
+[submodule "Sublime Text/CopyFilePath"]
+	path = Sublime Text/CopyFilePath
+	url = git@github.com:malthejorgensen/subl-CopyFilePath.git

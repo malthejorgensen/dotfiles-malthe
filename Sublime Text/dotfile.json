@@ -1,0 +1,32 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./Library-Application Support-Sublime Text-Packages-User",
+    "target": "~/Library/Application Support/Sublime Text/Packages/User"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./ConvertCase",
+    "target": "~/Library/Application Support/Sublime Text/Packages/ConvertCase"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./CopyFilePath",
+    "target": "~/Library/Application Support/Sublime Text/Packages/CopyFilePath"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./Base64",
+    "target": "~/Library/Application Support/Sublime Text/Packages/Base64"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./NeoVintageous",
+    "target": "~/Library/Application Support/Sublime Text/Packages/NeoVintageous"
+  }
+]

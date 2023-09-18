@@ -1,0 +1,57 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AlignTab",
+		"ANSIescape",
+		"Better CoffeeScript",
+		"ColorSchemeSelector",
+		"Diffy",
+		"EditorConfig",
+		"Elm Syntax Highlighting",
+		"FileDiffs",
+		"GitGutter",
+		"GitStatusBar",
+		"HTMLBeautify",
+		"Indent XML",
+		"isort",
+		"Jade",
+		"Jinja2",
+		"JsPrettier",
+		"Less",
+		"LoremGibson",
+		"LSP",
+		"LSP-pyright",
+		"LSP-ruff",
+		"LSP-typescript",
+		"NimPlus",
+		"Package Control",
+		"Package Reloader",
+		"Pretty JSON",
+		"PyCover",
+		"Sass",
+		"sublack",
+		"sublime-text-gitignore",
+		"SublimeLinter",
+		"SublimeLinter-contrib-scss-lint",
+		"SublimeLinter-contrib-terraform",
+		"SublimeLinter-eslint",
+		"SublimeLinter-flake8",
+		"SublimeLinter-mypy",
+		"Terraform",
+		"TrailingSpaces",
+	],
+	"repositories":
+	[
+		"https://github.com/apc999/sublime-text-gitignore"
+	],
+	// Some packages I have locally are git repos cloned from Github.
+	// and are often checked out on a branch. This doesn't work in Sublime Text
+	// because it expects to update the repo/branch from the remote/origin, which
+	// isn't set for these local branches. We don't need the git repo packages to
+	// auto-update anyways.
+	"ignore_vcs_packages": true,
+}

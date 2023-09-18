@@ -3,3 +3,4 @@
 /aws/sso/cache/
 /karabiner/karabiner/automatic_backups/
 /vim/.vim/bundle/
+/Sublime Text/Library-Application Support-Sublime Text-Packages-User/SublimeLinter/*.tmtheme
