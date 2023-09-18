@@ -143,6 +143,7 @@ alias gpr git-safe-pull
 alias git-merge-cleanup 'find -E . -regex \'.*_(BACKUP|BASE|LOCAL|REMOTE)_[0-9]{4}\.[^\.]+\' -print0 | xargs -0 rm'
 alias gdo "git diff origin/(gb)"
 alias gfo 'git fetch origin'
+alias gcp 'git cherry-pick'
 alias glo "git log origin/(gb) --pretty=oneline"
 alias glp "git log --pretty=oneline"
 # Use the built-in `type` command to determine if a function with a given name
