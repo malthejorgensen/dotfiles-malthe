@@ -1,0 +1,38 @@
+{
+  "title": "Safari: Map ESC to Cmd-. and Option-ESC",
+  "rules": [
+    {
+      "description": "Safari: Map ESC to Cmd-. and Option-ESC",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "escape"
+          },
+          "to": [
+            {
+              "key_code": "period",
+              "modifiers": [
+                "left_gui"
+              ]
+            },
+            {
+              "key_code": "escape",
+              "modifiers": [
+                "left_option"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com.apple.Safari"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
