@@ -1,0 +1,21 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./.vim",
+    "target": "~/.vim"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./.vimrc",
+    "target": "~/.vimrc"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./.gvimrc",
+    "target": "~/.gvimrc"
+  }
+
+]
