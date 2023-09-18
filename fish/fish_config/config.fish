@@ -133,7 +133,9 @@ function git-rebase-origin
     if test (count $argv) -gt 0
         git fetch $argv[1]; git rebase $argv[1]/(gb)
     else
-        git fetch; git rebase origin/(gb)
+        set --local remote_name (git config branch.$(git name-rev --name-only HEAD).remote)
+        # Normally, $remote_name will be "origin", but not always
+        git fetch; git rebase $remote_name/(gb)
     end
   end
 alias git-safe-pull git-rebase-origin
