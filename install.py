@@ -10,10 +10,9 @@ import shutil
 def parse_path(path, path_app_dir):
     if path.startswith('./'):
         return os.path.join(path_app_dir, path[2:])
-    elif path.startswith('~/'):
-        # http://stackoverflow.com/questions/4028904/how-to-get-the-home-directory-in-python
-        home_directory = os.path.expanduser('~')
-        return os.path.join(home_directory, path[2:])
+
+    # http://stackoverflow.com/questions/4028904/how-to-get-the-home-directory-in-python
+    return os.path.expanduser(path)
 
 
 def ensure_dir_exists(path):
