@@ -95,7 +95,7 @@ alias subl 'reattach-to-user-namespace subl'
 
 
 # You never want to `rm` something -- you want to put it in the trash
-which trash; and alias rm 'trash'
+which trash >/dev/null; and alias rm 'trash'
 
 # Always ask for confirmation for overwriting when using `mv`
 function mv
