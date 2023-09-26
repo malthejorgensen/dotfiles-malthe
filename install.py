@@ -155,7 +155,11 @@ args = parser.parse_args()
 
 if args.app_dirs == []:
     if args.all:
-        app_dirs = [f.name for f in os.scandir(os.getcwd()) if f.is_dir()]
+        app_dirs = [
+            f.name
+            for f in os.scandir(os.getcwd())
+            if f.is_dir() and not f.name.endswith('.disabled')
+        ]
     else:
         print('Please pass one or more app directories, or pass the `--all` flag.')
         exit(5)
