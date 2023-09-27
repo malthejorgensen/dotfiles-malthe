@@ -31,7 +31,7 @@ def ensure_dir_exists(path):
             yesno = input(
                 '`%s` doesn\'t exist - do you want to create it? (Yes/No) ' % path
             )
-            if yesno == 'Yes':
+            if yesno.lower() == 'yes':
                 os.mkdir(path)
             else:
                 return False
