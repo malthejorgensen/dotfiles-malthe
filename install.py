@@ -34,6 +34,7 @@ def ensure_dir_exists(path):
             if yesno.lower() == 'yes':
                 os.mkdir(path)
             else:
+                print('Not creating `%s`' % path)
                 return False
 
     return True
