@@ -9,6 +9,16 @@ set -Ux LANG en_US.UTF-8
 # See: https://stackoverflow.com/q/66283714/118608
 set -Ux EDITOR vim
 
+# `less` config
+# -S: Don't wrap lines
+# -R: Allow colored input (parse ANSI codes)
+#     This is required for `git log` to work.
+# --quit-if-one-screen (or -F): Don't keep `less` open if the output fits in the
+#                               terminal (espicially relevant if there's no 
+#                               output -- in that case you don't want to have
+#                               `less` just stay open on a blank screen)
+set -Ux LESS '-S -R --quit-if-one-screen'
+
 # Keybindings
 # Ctrl-J erases from cursor to beginning of line
 # -- breaks `poetry shell`
