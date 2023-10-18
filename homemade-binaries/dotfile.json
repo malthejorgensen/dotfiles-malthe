@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./git-unconflict",
+    "target": "~/bin/git-unconflict"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./remove_bom",
+    "target": "~/bin/remove_bom"
+  }
+]

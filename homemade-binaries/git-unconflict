@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+import argparse
+from enum import Enum
+
+
+class ReaderState(Enum):
+    NO_CONFLICT = 'NO_CONFLICT'
+    TOP = 'TOP'
+    BOTTOM = 'BOTTOM'
+
+
+def unconflict(filepath, conflict_option):
+    with open(filepath, 'r+') as file:
+        output = []
+        state = ReaderState.NO_CONFLICT
+        for line in file.readlines():
+            if line.startswith('<<<<<<<'):
+                if state != ReaderState.NO_CONFLICT:
+                    breakpoint()
+                state = ReaderState.TOP
+            elif line.startswith('======='):
+                if state != ReaderState.TOP:
+                    breakpoint()
+                state = ReaderState.BOTTOM
+            elif line.startswith('>>>>>>>'):
+                if state != ReaderState.BOTTOM:
+                    breakpoint()
+                state = ReaderState.NO_CONFLICT
+            elif state == ReaderState.BOTTOM and conflict_option == ReaderState.BOTTOM:
+                output.append(line)
+            elif state == ReaderState.TOP and conflict_option == ReaderState.TOP:
+                output.append(line)
+            elif state == ReaderState.NO_CONFLICT:
+                # Non-conflicted lines are always part of output
+                output.append(line)
+
+        # Overwrite file
+        file.seek(0)
+        file.truncate(0)
+        file.writelines(output)
+        # for line in output:
+        #     print(line, end='')
+
+
+def run():
+    parser = argparse.ArgumentParser(
+        prog='git-unconflict',
+        description='''Automatically resolve git conflicts
+
+            git-unconflict bottom $(git diff --name-only)
+
+        When rebasing "top" is from `master`/`main` and "bottom"
+        is from the current branch.
+        "top" is called "ours" in git terms and "bottom" is called
+        "theirs".''',
+    )
+
+    parser.add_argument('resolve_option', choices=['top', 'bottom'])
+    parser.add_argument('files', nargs='+')
+
+    args = parser.parse_args()
+
+    if args.resolve_option == 'bottom':
+        conflict_option = ReaderState.BOTTOM
+    elif args.resolve_option == 'top':
+        conflict_option = ReaderState.TOP
+
+    for filepath in args.files:
+        unconflict(filepath, conflict_option=conflict_option)
+
+
+if __name__ == '__main__':
+    run()
