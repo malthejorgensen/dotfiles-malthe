@@ -1,14 +1,8 @@
 [
   {
-    "comment": "",
+    "comment": "The `less` binary built into macOS doesn't support the `lesskey` functionality -- ergo this file does nothing",
     "type": "symlink",
     "source": "./.less",
     "target": "~/.less"
-  },
-  {
-    "comment": "",
-    "type": "symlink",
-    "source": "./.lesskey",
-    "target": "~/.lesskey"
   }
 ]
