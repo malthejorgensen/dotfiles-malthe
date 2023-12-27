@@ -25,7 +25,9 @@ set -Ux LESS '-S -R --quit-if-one-screen'
 # bind \cj backward-kill-line
 
 # Enable Homebrew
-eval (/opt/homebrew/bin/brew shellenv)
+if [ -z /opt/homebrew/bin/brew ]
+  eval (/opt/homebrew/bin/brew shellenv)
+end
 
 # Add ~/bin to $PATH
 set --export PATH $HOME/bin $PATH
@@ -381,7 +383,9 @@ set -g fish_user_paths "/usr/local/lib/ruby/gems/2.7.0/bin" $fish_user_paths
 # set --export HOMEBREW_CASK_OPTS "--appdir=~/Applications"
 
 # ASDF
-source (brew --prefix asdf)/libexec/asdf.fish
+if type -q brew
+  source (brew --prefix asdf)/libexec/asdf.fish
+end
 
 # poetry
 set --export PATH "$HOME/.local/bin" $PATH
