@@ -14,9 +14,9 @@ augroup END
 
 " General "{{{
 
-" I used to use fish as my shell
+" I use fish as my shell
 " fish is not unix-compatible and therefore breaks plugins
-" set shell=/bin/sh
+set shell=/bin/bash
 
 set encoding=utf8
 set fileformat=unix
