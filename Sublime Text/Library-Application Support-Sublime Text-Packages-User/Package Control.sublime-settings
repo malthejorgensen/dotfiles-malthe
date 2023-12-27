@@ -24,6 +24,7 @@
 		"Less",
 		"LoremGibson",
 		"LSP",
+		"LSP-copilot",
 		"LSP-pyright",
 		"LSP-ruff",
 		"LSP-typescript",
