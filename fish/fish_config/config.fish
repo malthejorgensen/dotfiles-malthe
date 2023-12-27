@@ -57,6 +57,12 @@ function fish_right_prompt
   date '+%H:%M'
 end
 
+function list
+  # Creates a list
+  #
+  # FROM: https://github.com/fish-shell/fish-shell/issues/445#issuecomment-145958769
+  string join \n $argv
+end
 
 
 ### Set $MANPATH
