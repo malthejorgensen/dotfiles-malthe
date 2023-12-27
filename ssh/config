@@ -4,11 +4,11 @@ Host *
     UseKeychain Yes
     AddKeysToAgent Yes
 
-Host github.com
-    IdentityFile %d/.ssh/id_rsa
-    # Disable Github by uncommenting the two lines below
-    # IdentitiesOnly yes
-    # IdentityFile %d/.ssh/invalid
+# Host github.com
+#     IdentityFile %d/.ssh/id_rsa
+#     # Disable Github by uncommenting the two lines below
+#     # IdentitiesOnly yes
+#     # IdentityFile %d/.ssh/invalid
 
 Host peergrade.io
     IdentityFile %d/.ssh/freebsd_peergrade.io
