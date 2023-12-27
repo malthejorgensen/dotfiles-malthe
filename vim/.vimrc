@@ -327,7 +327,7 @@ endfunction
 "   \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
 
 " tcomment
-let g:tcommentMapLeaderOp1 = ',c'
+let g:tcomment_opleader1 = ',c'
 
 " nerdcommenter
 let g:NERDCustomDelimiters = { 'haskell': { 'left': '-- ', 'leftAlt': '{-', 'rightAlt': '-}' } }
