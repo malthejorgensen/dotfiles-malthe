@@ -25,7 +25,7 @@ set -Ux LESS '-S -R --quit-if-one-screen'
 # bind \cj backward-kill-line
 
 # Enable Homebrew
-if [ -z /opt/homebrew/bin/brew ]
+if [ -e /opt/homebrew/bin/brew ]
   eval (/opt/homebrew/bin/brew shellenv)
 end
 
