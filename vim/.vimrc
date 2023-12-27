@@ -453,7 +453,7 @@ filetype plugin indent on
 " "}}}
 
 " Colorscheme
-colorscheme wombat256
+colorscheme wombat256mod
 
 " ShowMarks
 " for an explanation of the marks below see :help `[
