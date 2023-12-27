@@ -340,115 +340,116 @@ let g:NERDCustomDelimiters = { 'haskell': { 'left': '-- ', 'leftAlt': '{-', 'rig
 " Set filetype OFF so that plugins with ftdetect work
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
 
-Bundle 'gmarik/vundle'
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
 " My Bundles here:
 "
 " Themes (colorschemes)
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tomasr/molokai'
-Bundle 'wombat256.vim'
-Bundle 'desert256.vim'
-Bundle '~/.vim/wombat256malthe'
-" Bundle 'zenburn'
-Bundle 'darkspectrum'
-Bundle 'BusyBee'
-Bundle 'epegzz/epegzz.vim'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'phd'
-Bundle 'twilight'
-" Bundle 'Mustang'
-Bundle 'wgibbs/vim-irblack'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'wombat256.vim'
+Plugin 'desert256.vim'
+" Plugin '~/.vim/wombat256malthe'
+" Plugin 'zenburn'
+Plugin 'darkspectrum'
+Plugin 'BusyBee'
+Plugin 'epegzz/epegzz.vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'phd'
+Plugin 'twilight'
+" Plugin 'Mustang'
+Plugin 'wgibbs/vim-irblack'
 
 " Extensions
-Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
-Bundle 'conormcd/matchindent.vim'
-Bundle 'Lokaltog/powerline'
-Bundle 'tpope/vim-fugitive'
-" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'sjbach/lusty'
-Bundle 'YankRing.vim'
-Bundle 'ShowMarks'
-"Bundle 'showmarks2'
-Bundle 'IndexedSearch'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'mutewinter/vim-indent-guides'
-"Bundle 'SudoEdit.vim'
-Bundle 'gmarik/sudo-gui.vim'
-Bundle 'ScrollColors'
-" Bundle 'vim-latex'
-" Bundle 'file:///Users/Malthe/.vim/AutomaticTexPlugin_12.2', {'sync':'no'}
-" Bundle '~/.vim/AutomaticTexPlugin_12.2'
-Bundle 'LaTeX-Box-Team/LaTeX-Box'
-Bundle 'Rykka/colorv.vim'
-" Bundle 'Pyclewn'
-"Bundle 'listmaps.vim' |" Lists where (key)maps have been defined but freezes
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'conormcd/matchindent.vim'
+Plugin 'Lokaltog/powerline'
+Plugin 'tpope/vim-fugitive'
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'sjbach/lusty'
+Plugin 'YankRing.vim'
+Plugin 'ShowMarks'
+"Plugin 'showmarks2'
+Plugin 'IndexedSearch'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'mutewinter/vim-indent-guides'
+"Plugin 'SudoEdit.vim'
+Plugin 'gmarik/sudo-gui.vim'
+Plugin 'ScrollColors'
+" Plugin 'vim-latex'
+" Plugin 'file:///Users/Malthe/.vim/AutomaticTexPlugin_12.2', {'sync':'no'}
+" Plugin '~/.vim/AutomaticTexPlugin_12.2'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'Rykka/colorv.vim'
+" Plugin 'Pyclewn'
+"Plugin 'listmaps.vim' |" Lists where (key)maps have been defined but freezes
                         " Vim
-Bundle 'mileszs/ack.vim'
+Plugin 'mileszs/ack.vim'
 
 " Language-specific
-" Bundle 'python_ifold'
-Bundle 'Rykka/riv.vim'
-Bundle 'petRUShka/vim-opencl'
-Bundle 'klen/python-mode'
-Bundle 'kchmck/vim-coffee-script'
-" Bundle 'tikhomirov/vim-glsl'
-Bundle 'Nemo157/glsl.vim'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'leafgarland/typescript-vim'
+" Plugin 'python_ifold'
+Plugin 'Rykka/riv.vim'
+Plugin 'petRUShka/vim-opencl'
+Plugin 'klen/python-mode'
+Plugin 'kchmck/vim-coffee-script'
+" Plugin 'tikhomirov/vim-glsl'
+Plugin 'Nemo157/glsl.vim'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'leafgarland/typescript-vim'
 
 "" Fish (shell)
 " https://github.com/sjl/dotfiles/blob/master/vim/syntax/fish.vim
-" Bundle 'aliva/vim-fish'
-Bundle 'aliva/vim-fish'
+" Plugin 'aliva/vim-fish'
+Plugin 'aliva/vim-fish'
 
 " Smart commands
-Bundle 'tomtom/tcomment_vim'
-Bundle 'Chiel92/vim-autoformat'
-Bundle 'godlygeek/tabular'
-"Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-repeat'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-surround'
-Bundle 'assistant'
-Bundle 'tmhedberg/matchit'
-Bundle 'tpope/vim-markdown'
-Bundle 'skammer/vim-css-color'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'godlygeek/tabular'
+"Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-repeat'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-surround'
+Plugin 'assistant'
+Plugin 'tmhedberg/matchit'
+Plugin 'tpope/vim-markdown'
+Plugin 'skammer/vim-css-color'
 
 " Completion
 let g:acp_enableAtStartup=0
 " Take a look at:
 " http://www.vim.org/scripts/script.php?script_id=2620
 " it says to disable AutoComplPop?
-Bundle 'AutoComplPop'
-Bundle 'ervandew/supertab'
-Bundle 'Shougo/neocomplcache'
+Plugin 'AutoComplPop'
+Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplcache'
 
 " Misc
-Bundle 'tweekmonster/startuptime.vim'
-Bundle 'tpope/vim-endwise'
+Plugin 'tweekmonster/startuptime.vim'
+Plugin 'tpope/vim-endwise'
 
-"Bundle 'L9'           |" FuzzyFinder depends on this
-"Bundle 'FuzzyFinder'
+"Plugin 'L9'           |" FuzzyFinder depends on this
+"Plugin 'FuzzyFinder'
 
 " non github repos
-"Bundle 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
+call vundle#end()
 
 " Set filetype ON again
 filetype plugin indent on
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginList          - list configured bundles
+" :PluginInstall(!)    - install(update) bundles
+" :PluginSearch(!) foo - search(or refresh cache first) for foo
+" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+" NOTE: comments after Plugin command are not allowed..
 " "}}}
 
 " Colorscheme
