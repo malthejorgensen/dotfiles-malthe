@@ -1,10 +1,17 @@
 from __future__ import print_function
 
 import argparse
-from builtins import input
 import json
 import os
 import shutil
+
+try:
+    # Python 2
+    input = raw_input
+except NameError:
+    # Python 3: `raw_input` is not defined, and we "fall back"
+    #           to `input` -- which is what we want
+    pass
 
 
 def parse_path(path, path_app_dir):
@@ -64,7 +71,8 @@ def create_symlink(source_path, target_path, replace_only=False):
         os.symlink(source_path, target_path)
 
 
-def check_file(full_path_source: str, full_path_target: str, verbose: bool) -> bool:
+def check_file(full_path_source, full_path_target, verbose):
+    # type: (str, str, bool) -> bool
     if not os.path.exists(full_path_target):
         if verbose:
             print('%s does not exist.' % (full_path_target,))
@@ -95,7 +103,8 @@ def check_file(full_path_source: str, full_path_target: str, verbose: bool) -> b
     return False
 
 
-def uninstall_file(full_path_source: str, full_path_target: str):
+def uninstall_file(full_path_source, full_path_target):
+    # type: (str, str) -> None
     if not os.path.exists(full_path_target):
         print('%s does not exist. Not uninstalling.' % (full_path_target,))
         return
@@ -156,9 +165,9 @@ args = parser.parse_args()
 if args.app_dirs == []:
     if args.all:
         app_dirs = [
-            f.name
-            for f in os.scandir(os.getcwd())
-            if f.is_dir() and not f.name.endswith('.disabled')
+            f
+            for f in os.listdir(os.getcwd())
+            if os.path.isdir(f) and not f.endswith('.disabled')
         ]
     else:
         print('Please pass one or more app directories, or pass the `--all` flag.')
