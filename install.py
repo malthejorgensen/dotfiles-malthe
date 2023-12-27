@@ -196,7 +196,9 @@ for app_dir in app_dirs:
             if file['type'] == 'symlink':
                 full_path_source = parse_path(file['source'], path_app_dir)
                 full_path_target = parse_path(file['target'], path_app_dir)
-                assert os.path.exists(full_path_source)
+                if not os.path.exists(full_path_source):
+                    print('"%s" was not found' % (full_path_source, ))
+                    continue
 
                 if args.check:
                     is_installed = is_installed and check_file(
