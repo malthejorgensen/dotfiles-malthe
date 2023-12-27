@@ -124,6 +124,10 @@ noremap \| ,
 " Command mode on Space
 nnoremap <Space> :
 vnoremap <Space> :
+"
+" Easily go to the beginning and of line
+noremap : $
+noremap J ^
 
 function! Righty()
   " Home-row navigation
@@ -433,10 +437,6 @@ Bundle 'tpope/vim-endwise'
 
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
-" ...
-" Easily go to the beginning and of line
-noremap : $
-noremap J ^
 
 " Set filetype ON again
 filetype plugin indent on
