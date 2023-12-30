@@ -1,0 +1,6 @@
+# Run `port installed requested` to produce this list
+tmux-pasteboard # `reattach-to-user-namespace`-command
+fd
+fish
+tig
+fzf
