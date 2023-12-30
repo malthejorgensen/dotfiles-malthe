@@ -10,5 +10,17 @@
     "type": "symlink",
     "source": "./remove_bom",
     "target": "~/bin/remove_bom"
+  },
+  {
+    "comment": "Sublime Text `subl`-command",
+    "type": "symlink",
+    "source": "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl",
+    "target": "~/bin/subl"
+  },
+  {
+    "comment": "GitX `gitx`-command",
+    "type": "symlink",
+    "source": "/Applications/GitX.app/Contents/Resources/gitx",
+    "target": "~/bin/gitx"
   }
 ]
