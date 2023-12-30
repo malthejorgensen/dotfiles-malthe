@@ -142,7 +142,8 @@ alias gc 'git checkout'
 alias gco 'git checkout'
 alias gcb 'git checkout -b'
 alias gtb 'git checkout (git branch | tr -d " " | fzf)'
-alias gb 'git branch --show-current'
+# alias gb 'git branch --show-current' # Works on git v2.22
+alias gb 'git rev-parse --abbrev-ref HEAD' # Old Intel Macbook is on git v2.20
 # alias gpr 'git pull --rebase'
 alias grm 'git rebase master --autostash'
 alias grmi 'git rebase -i master --autostash'
