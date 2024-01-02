@@ -123,6 +123,12 @@ end
 function cp
   /bin/cp -i $argv
 end
+# `sponge` (from `moreutils`) is _always_ dangerous. Never run it -- instead print a safer alternative.
+function sponge
+  echo '`sponge` is dangerous. If any previous command in the pipeline fails, `sponge` will delete the file.'
+  echo 'Instead of `PIPELINE | sponge FILE` do `PIPELINE > FILE.tmp && mv FILE.tmp FILE`'
+  exit 1
+end
 
 # Make it easy to use find (in 99% of cases)
 function ifind
