@@ -4,3 +4,4 @@ fd
 fish
 tig
 fzf
+gron
