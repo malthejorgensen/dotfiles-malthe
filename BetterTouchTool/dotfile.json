@@ -1,0 +1,8 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./com.hegenberg.BetterTouchTool.plist",
+    "target": "~/Library/Preferences/com.hegenberg.BetterTouchTool.plist"
+  }
+]
