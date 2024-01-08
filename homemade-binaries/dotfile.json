@@ -12,6 +12,12 @@
     "target": "~/bin/remove_bom"
   },
   {
+    "comment": "",
+    "type": "symlink",
+    "source": "./html-prettify",
+    "target": "~/bin/html-prettify"
+  },
+  {
     "comment": "Sublime Text `subl`-command",
     "type": "symlink",
     "source": "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl",

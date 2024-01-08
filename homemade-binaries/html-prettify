@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+import argparse
+from html.parser import HTMLParser
+import sys
+
+
+class Parser(HTMLParser):
+    def __init__(self):
+        HTMLParser.__init__(self)
+        self.html_prettified = ''
+        self.indent_level = 0
+        self.indent_prefix = ''
+
+    def handle_starttag(self, tag, attrs):
+        attrs_string = ''
+        for key, value in attrs:
+            if value:
+                attrs_string += ' ' + key + '="' + value + '"'
+            else:
+                attrs_string += ' ' + key
+
+        tag_str = '<' + tag + attrs_string + '>'
+        self.html_prettified += self.indent_prefix + tag_str + '\n'
+
+        # Don't indent self-closing HTML tags
+        if tag not in ('img', 'br'):
+            self.indent_level += 1
+            self.indent_prefix = '  ' * self.indent_level
+
+    def handle_endtag(self, tag):
+        self.indent_level -= 1
+        self.indent_prefix = '  ' * self.indent_level
+        self.html_prettified += self.indent_prefix + '</' + tag + '>' + '\n'
+
+    def handle_data(self, data):
+        self.html_prettified += self.indent_prefix + data + '\n'
+
+    def handle_entityref(self, name):
+        self.html_prettified += self.indent_prefix + '&' + name + ';' + '\n'
+
+    def handle_charref(self, name):
+        self.html_prettified += self.indent_prefix + '&#' + name + ';'
+
+
+def html_prettify(content):
+    parser = Parser()
+    parser.feed(content)
+
+    return parser.html_prettified
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser('html-prettify')
+    parser.add_argument('file', nargs='?')
+
+    args = parser.parse_args()
+
+    if args.file:
+        with open(args.file, 'r') as f:
+            content = f.read()
+    else:
+        content = sys.stdin.read()
+
+    print(html_prettify(content))
