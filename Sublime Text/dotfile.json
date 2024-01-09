@@ -26,6 +26,12 @@
   {
     "comment": "",
     "type": "symlink",
+    "source": "./HtmlPrettify",
+    "target": "~/Library/Application Support/Sublime Text/Packages/HtmlPrettify"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
     "source": "./NeoVintageous",
     "target": "~/Library/Application Support/Sublime Text/Packages/NeoVintageous"
   }

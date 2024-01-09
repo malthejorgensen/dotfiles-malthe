@@ -7,3 +7,6 @@
 [submodule "Sublime Text/CopyFilePath"]
 	path = Sublime Text/CopyFilePath
 	url = git@github.com:malthejorgensen/subl-CopyFilePath.git
+[submodule "Sublime Text/HtmlPrettify"]
+	path = Sublime Text/HtmlPrettify
+	url = git@github.com:malthejorgensen/subl-HtmlPrettify.git
