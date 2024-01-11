@@ -1,0 +1,21 @@
+// Settings in here override those in "LSP/LSP.sublime-settings"
+{
+  // Show verbose debug messages in the Sublime Text console.
+  "log_debug": true,
+  // Log communication from and to language servers in the output panel.
+  "log_server": ["panel"],
+  // "clients": {
+  //   "node": {
+  //     "enabled": true,
+  //     "command": "",
+  //     "selector": "source.js, source.jsx, source.ts, source.tsx",
+  //   }
+  // }
+  "lsp_format_on_save": true,
+  "lsp_code_actions_on_save": {
+    "source.lsp_format_on_save": true,
+    // "source.fixAll": true,
+    "source.organizeImports": true,
+    "source.applyFormat": true
+  },
+}
