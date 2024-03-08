@@ -1,3 +1,5 @@
+Include /Users/malthe/.colima/ssh_config
+
 Host *
     # OS X 10.12 (Sierra): Make `ssh-agent` work
     # https://www.reddit.com/r/osx/comments/52zn5r/difficulties_with_sshagent_in_macos_sierra/
