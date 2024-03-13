@@ -390,9 +390,11 @@ set -g fish_user_paths "/usr/local/lib/ruby/gems/2.7.0/bin" $fish_user_paths
 # set --export HOMEBREW_CASK_OPTS "--appdir=~/Applications"
 
 # ASDF
-if type -q brew
-  source (brew --prefix asdf)/libexec/asdf.fish
-end
+source ~/.asdf/asdf.fish
+# ASDF Homebrew install
+# if type -q brew
+#   source (brew --prefix asdf)/libexec/asdf.fish
+# end
 
 # poetry
 set --export PATH "$HOME/.local/bin" $PATH
