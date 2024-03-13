@@ -3,4 +3,8 @@
 /aws/sso/cache/
 /karabiner/karabiner/automatic_backups/
 /vim/.vim/bundle/
+
+# Auto-generated files
 /Sublime Text/Library-Application Support-Sublime Text-Packages-User/SublimeLinter/*.tmtheme
+/Sublime Text/Library-Application Support-Sublime Text-Packages-User/ANSIescape/ansi.sublime-color-scheme
+/Sublime Text/Library-Application Support-Sublime Text-Packages-User/Package Control.user-ca-bundle
