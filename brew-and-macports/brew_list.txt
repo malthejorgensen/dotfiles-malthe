@@ -1,0 +1,18 @@
+awscli
+curl
+fd
+fish
+fzf
+git
+reattach-to-user-namespace
+ripgrep
+tmux
+
+# Casks
+alfred
+bettertouchtool
+caffeine
+gitx
+iterm2
+karabiner-elements
+sublime-text
