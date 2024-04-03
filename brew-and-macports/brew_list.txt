@@ -6,6 +6,7 @@ fzf
 git
 reattach-to-user-namespace
 ripgrep
+tig
 tmux
 
 # Casks
