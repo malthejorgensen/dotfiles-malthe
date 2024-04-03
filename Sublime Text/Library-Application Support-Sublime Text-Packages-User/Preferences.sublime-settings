@@ -23,6 +23,7 @@
 		"FileDiffs",
 		"GitStatusBar",
 		"isort",
+		"Six",
 		"sublack",
 		"SublimeLinter-flake8",
 		"Vintage",
