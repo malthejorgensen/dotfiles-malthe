@@ -3,6 +3,7 @@ curl
 fd
 fish
 fzf
+gh
 git
 reattach-to-user-namespace
 ripgrep
