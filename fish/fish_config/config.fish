@@ -205,6 +205,13 @@ end
 function gr
   git checkout (grp)
 end
+function gdr
+  set --local __branch_to_delete (grp)
+  read -n 1 --local -P "Delete branch \"$__branch_to_delete\"?"' (Y/n) ' __yes_no
+  if test "$__yes_no" = 'Y'
+    git branch -D "$__branch_to_delete"
+  end
+end
 function gtp
   git branch | sed -E 's/^.{2}//' | fzf
 end
