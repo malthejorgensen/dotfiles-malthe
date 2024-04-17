@@ -13,7 +13,6 @@
   // }
   "lsp_format_on_save": true,
   "lsp_code_actions_on_save": {
-    "source.lsp_format_on_save": true,
     // "source.fixAll": true,
     "source.organizeImports": true,
     "source.applyFormat": true
