@@ -208,7 +208,7 @@ end
 function gdr
   set --local __branch_to_delete (grp)
   read -n 1 --local -P "Delete branch \"$__branch_to_delete\"?"' (Y/n) ' __yes_no
-  if test "$__yes_no" = 'Y'
+  if test "$__yes_no" = 'Y' -o "$__yes_no" = 'y'
     git branch -D "$__branch_to_delete"
   end
 end
