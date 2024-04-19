@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Command</key>
-	<string></string>
+	<string>/opt/local/bin/fish</string>
 	<key>Default Bookmark Guid</key>
 	<string>D206B02C-534F-4044-A20D-15EEB91AD4D4</string>
 	<key>HapticFeedbackForEsc</key>
@@ -245,7 +245,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>/opt/homebrew/bin/fish</string>
+			<string>/opt/local/bin/fish</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -925,7 +925,7 @@
 			<key>Columns</key>
 			<integer>120</integer>
 			<key>Command</key>
-			<string>/opt/homebrew/bin/fish</string>
+			<string>/opt/local/bin/fish</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
