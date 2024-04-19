@@ -1009,7 +1009,7 @@
 			<key>HotKey Window AutoHides</key>
 			<true/>
 			<key>HotKey Window Dock Click Action</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>HotKey Window Floats</key>
 			<false/>
 			<key>HotKey Window Reopens On Activation</key>
