@@ -5,7 +5,7 @@
 	<key>Command</key>
 	<string></string>
 	<key>Default Bookmark Guid</key>
-	<string>6394E940-0BFA-4C7E-85C6-B127234548AD</string>
+	<string>D206B02C-534F-4044-A20D-15EEB91AD4D4</string>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
@@ -1412,6 +1412,8 @@
 			<string>/Users/malthe</string>
 		</dict>
 	</array>
+	<key>OpenBookmark</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
