@@ -6,3 +6,4 @@ tig
 fzf
 gron
 ripgrep
+HexFiend
