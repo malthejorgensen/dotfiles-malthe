@@ -246,13 +246,6 @@ function smart-rebase
       return 0
   end
 
-  # if set --query --local _flag_base
-  #     set --local base_branch $_flag_base
-  # else
-  #     set --local base_branch master
-  # end
-  set --local base_branch $argv[1]
-
   # `--decorate=full` shows `refs/heads` before branch names so that we can 
   # `--decorate-refs=refs/heads` filters out tags and remotes
   # `tail -n +2` skips the first line (current commit/branch)
