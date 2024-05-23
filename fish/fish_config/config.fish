@@ -263,9 +263,9 @@ function smart-rebase
             --decorate=short \
             --decorate-refs=refs/heads |  \
       tail -n +2 | \
-      # awk does expose regex capture groups (https://stackoverflow.com/a/2957781/118608)
+      # awk does not expose regex capture groups (https://stackoverflow.com/a/2957781/118608)
       # But `gawk` does: gawk '/^[a-f0-9]{40} \(([^,)]+)/ { match($0, /^[a-f0-9]{40} \\(([^,)]+)/, matches); print(matches[1]) }' | \
-      awk '/^[a-f0-9]{40} \(([^,)]+)/ { print($1) }' | \
+      awk '/^[a-f0-9]{40} \(([^,)]+)/ { print(substr($2, 2, length($2)-2)) }' | \
       head -n 1
   )
   set --local current_branch (gb)
