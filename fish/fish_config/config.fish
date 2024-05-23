@@ -274,7 +274,7 @@ function smart-rebase
     or return 1 # if the read was aborted with ctrl-c/ctrl-d
     switch $response
         case y Y
-            git rebase --onto $base_branch $closest_parent_branch $current_branch
+            git rebase -i --onto $base_branch $closest_parent_branch $current_branch
             break
         case n N
             # We return from the function without printing
