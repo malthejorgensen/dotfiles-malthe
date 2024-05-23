@@ -268,9 +268,21 @@ function smart-rebase
       awk '/^[a-f0-9]{40} \(([^,)]+)/ { print(substr($2, 2, length($2)-2)) }' | \
       head -n 1
   )
+
+  set --local base_branch $argv[1]
+  if test -z "$base_branch"
+    set --function base_branch $closest_parent_branch
+  end
+
   set --local current_branch (gb)
-  echo "This will run `git rebase --onto $base_branch $closest_parent_branch $current_branch` (yes/no)"
-  while read --nchars 1 -l response --prompt-str="Are you sure? (y/n)"
+  echo "This will run:
+
+git rebase
+  --onto $base_branch
+  $closest_parent_branch
+  $current_branch
+"
+  while read --nchars 1 -l response --prompt-str="Are you sure? (y/n) "
     or return 1 # if the read was aborted with ctrl-c/ctrl-d
     switch $response
         case y Y
