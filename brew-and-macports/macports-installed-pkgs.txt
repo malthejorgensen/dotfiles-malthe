@@ -8,3 +8,12 @@ gron
 ripgrep
 HexFiend
 ImageMagick
+
+# To get Docker on macOS 10.14 (old Intel Macbook):
+# git clone --single-branch https://github.com/macports/macports-ports.git ~/old-macports-ports-git
+# cd ~/old-macports-ports-git/emulators/qemu
+# git log --grep qemu
+# git checkout fbd9589d91aac4528b693f9846f171c235e79d8f
+# sudo port install # Installs `qemu` using `Portfile` in current directory
+# sudo port install colima
+# sudo port install docker
