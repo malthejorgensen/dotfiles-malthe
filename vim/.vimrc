@@ -21,6 +21,13 @@ set shell=/bin/bash
 set encoding=utf8
 set fileformat=unix
 
+" Allow files specifying their format (e.g. the Kitty terminal's settings file)
+"
+" This option allows the first line of a file (the "modeline") to set certain
+" vim options -- e.g. `# vim:foldmethod=marker`.
+set modeline
+set modelines=1
+
 " Set 256 colors
 set t_Co=256
 " Fix Vim background color in terminal
