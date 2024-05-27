@@ -30,7 +30,7 @@ if [ -e /opt/homebrew/bin/brew ]
 end
 
 # Add ~/bin to $PATH
-set --export PATH $HOME/bin $PATH
+fish_add_path -g "$HOME/bin"
 
 # Git prompt/statusline
 # From: https://www.martinklepsch.org/posts/git-prompt-for-fish-shell.html
@@ -394,11 +394,11 @@ end
 # set --export FLAGS_GETOPT_CMD "$__brew_prefix/bin/getopt"
 
 # Python from Homebrew (Homebrew exposes a `python3.8`-executable not `python`)
-set --export PATH '/usr/local/opt/python@3.8/libexec/bin' $PATH
+fish_add_path -g '/usr/local/opt/python@3.8/libexec/bin'
 # Ruby from Homebrew (Homebrew doesn't shadow macOS ruby by default)
-set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
+fish_add_path -g '/usr/local/opt/ruby/bin'
 # ... also show gems
-set -g fish_user_paths "/usr/local/lib/ruby/gems/2.7.0/bin" $fish_user_paths
+fish_add_path -g '/usr/local/lib/ruby/gems/2.7.0/bin'
 
 # DEPRECATED: Custom installation dir for `brew cask` (I don't do this anymore)
 # set --export HOMEBREW_CASK_OPTS "--appdir=~/Applications"
@@ -411,16 +411,16 @@ source ~/.asdf/asdf.fish
 # end
 
 # poetry
-set --export PATH "$HOME/.local/bin" $PATH
+fish_add_path -g "$HOME/.local/bin" 
 
 # cargo
-set --export PATH "$HOME/.cargo/bin" $PATH
+fish_add_path -g "$HOME/.cargo/bin"
 
 # rbenv
-#set --export PATH "$HOME/.rbenv/shims" $PATH
+#fish_add_path -g "$HOME/.rbenv/shims"
 
 # PHP's composer
-set --export PATH $HOME/.composer/vendor/bin $PATH
+fish_add_path -g "$HOME/.composer/vendor/bin"
 
 # OPAM configuration (OCaml)
 source /Users/malthe/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
@@ -441,7 +441,7 @@ source /Users/malthe/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 # [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && bass source "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Docker
-set --export PATH "$HOME/.docker/bin" $PATH
+fish_add_path -g "$HOME/.docker/bin"
 
 # DEPRECATED: Custom installation dir for `brew cask` (I don't do this anymore)
 # Use Homebrew Postgres v11 instead of v12 for now
