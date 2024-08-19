@@ -1,0 +1,11 @@
+unmap k
+map k scrollDown
+unmap l
+map l scrollUp
+
+map <C-b> scrollFullPageUp
+map <C-f> scrollFullPageDown
+
+map J goBack
+map Æ goForward
+map : goForward
