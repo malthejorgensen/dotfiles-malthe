@@ -1,0 +1,8 @@
+[
+  {
+    "comment": "Symlink this directory to ~/.config/wezterm/",
+    "type": "symlink",
+    "source": "./",
+    "target": "~/.config/wezterm"
+  }
+]
