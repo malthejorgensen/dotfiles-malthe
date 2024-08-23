@@ -423,7 +423,7 @@ fish_add_path -g "$HOME/.cargo/bin"
 fish_add_path -g "$HOME/.composer/vendor/bin"
 
 # OPAM configuration (OCaml)
-source /Users/malthe/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+# source /Users/malthe/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
 # virtualfish
 # https://github.com/adambrenecki/virtualfish
