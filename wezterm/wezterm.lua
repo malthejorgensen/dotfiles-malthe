@@ -34,6 +34,15 @@ config.keys = {
     mods = 'OPT',
     action = wezterm.action.SendString '\x1bf',
   },
+  {
+    -- Cmd + , edits Wezterm config
+    key = ',',
+    mods = 'SUPER',
+    action = wezterm.action.SpawnCommandInNewTab {
+      cwd = wezterm.home_dir,
+      args = { 'vim', wezterm.config_file },
+    },
+  },
 }
 
 return config
