@@ -25,6 +25,8 @@ def parse_path(path, path_app_dir):
 
 def ensure_dir_exists(path):
     # Make any directories that don't exist, e.g. "~/.config"
+    assert not path.endswith('/'), 'Ending "/" should already have been stripped from path'
+
     paths = []
     for i in range(100):
         parent_dir = os.path.dirname(path)
@@ -52,6 +54,10 @@ def create_symlink(source_path, target_path, replace_only=False):
     if replace_only and not os.path.exists(target_path):
         print('%s does not exist. Skipping due to `--replace-only`' % target_path)
         return
+
+    # If `target_path` ends in a "/" (to indicate a directory) then
+    # both `os.path.is_link()` and `os.symlink()` won't work so we strip it.
+    target_path = target_path.rstrip('/')
 
     if os.path.exists(target_path):
         yesno = input(
