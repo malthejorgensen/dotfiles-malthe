@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "Test: Create a lot of non-existent parent directories",
+    "type": "symlink",
+    "source": "./malthes_test_file",
+    "target": "~/.config/dotfiles-self-test/very/long/obscure/path/malthe_test_file"
+  },
+  {
+    "comment": "Test: Check that we can symlink this directory (and ending with `/`)",
+    "type": "symlink",
+    "source": "./",
+    "target": "~/.config/dotfiles-self-test/a/different/long/path/config_directory"
+  }
+]
