@@ -448,3 +448,6 @@ fish_add_path -g "$HOME/.docker/bin"
 # set -g fish_user_paths "/usr/local/opt/postgresql@11/bin" $fish_user_paths
 # Use Postgres v11 data directory (same as `postgres -D /usr/local/var/postgres11.1`)
 # set -Ux PGDATA '/usr/local/var/postgres11.1'
+
+# direnv
+direnv hook fish | source
