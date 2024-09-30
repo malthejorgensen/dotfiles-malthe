@@ -1,15 +1,24 @@
-awscli
+# Essentials
 curl
-fd
-fish
-fzf
-gh
 git
-reattach-to-user-namespace
-ripgrep
-sd
+
+# My CLI setup
+fish
 tig
 tmux
+
+# Modern "UNIX" tools
+fd
+fzf
+ripgrep
+sd
+
+# macOS CLI
+reattach-to-user-namespace
+
+# Vendors 
+awscli
+gh
 
 # Casks
 alfred
