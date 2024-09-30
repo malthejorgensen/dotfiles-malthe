@@ -25,6 +25,6 @@ alfred
 bettertouchtool
 caffeine
 gitx
-iterm2
 karabiner-elements
 sublime-text
+wezterm
