@@ -1,0 +1,8 @@
+[
+  {
+    "comment": "Symlink current directory to ~/.hammerspoon/",
+    "type": "symlink",
+    "source": "./",
+    "target": "~/.hammerspoon/"
+  }
+]
