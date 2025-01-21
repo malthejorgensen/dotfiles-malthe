@@ -1,0 +1,26 @@
+[
+  {
+    "comment": "VSCode (settings.json)",
+    "type": "symlink",
+    "source": "./settings.json",
+    "target": "~/Library/Application Support/VSCode/User/settings.json"
+  },
+  {
+    "comment": "Cursor (settings.json)",
+    "type": "symlink",
+    "source": "./settings.json",
+    "target": "~/Library/Application Support/Cursor/User/settings.json"
+  },
+  {
+    "comment": "VSCode (keybindings.json)",
+    "type": "symlink",
+    "source": "./keybindings.json",
+    "target": "~/Library/Application Support/VSCode/User/keybindings.json"
+  },
+  {
+    "comment": "Cursor (keybindings.json)",
+    "type": "symlink",
+    "source": "./keybindings.json",
+    "target": "~/Library/Application Support/Cursor/User/keybindings.json"
+  }
+]
