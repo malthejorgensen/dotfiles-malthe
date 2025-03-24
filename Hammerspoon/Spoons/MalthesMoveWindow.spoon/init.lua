@@ -6,14 +6,35 @@ obj.version = "0.2"
 obj.author = "Malthe Jørgensen <malthe.jorgensen@gmail.com>"
 obj.license = "MIT"
 
+-- Inspired by
+-- https://gist.github.com/kizzx2/e542fa74b80b7563045a
+-- https://gist.github.com/nicwolff/b95cda99e672eeb28911adadbc9b0054
+
 function obj:init()
 log = hs.logger.new('moveWindow','debug')
+
+function get_window_under_mouse()
+  -- Invoke `hs.application` because `hs.window.orderedWindows()` doesn't do it
+  -- and breaks itself
+  local _ = hs.application
+
+  local my_pos = hs.geometry.new(hs.mouse.getAbsolutePosition())
+  local my_screen = hs.mouse.getCurrentScreen()
+
+  return hs.fnutils.find(hs.window.orderedWindows(), function(w)
+    return my_screen == w:screen() and my_pos:inside(w:frame())
+  end)
+end
+
+dragging_win = nil
+dragging_mode = 1
 
 lastCursorPosition = nil
 moveTimerHandle = nil
 function moveWindow()
-    local window = hs.window.frontmostWindow()
+    local window = dragging_win
     local frame = window:frame()
+    -- local mods = hs.eventtap.checkKeyboardModifiers()
 
     local currentCursorPosition = hs.mouse.absolutePosition()
     if lastCursorPosition then
@@ -25,32 +46,10 @@ function moveWindow()
         window:setFrame(frame, 0.01) -- 0.01 = 50 ms animation time
     end
     lastCursorPosition = currentCursorPosition
-
-    -- key repeat version
-    -- if moveTimerHandle then
-    --     moveTimerHandle:stop()
-    -- end
-    -- moveTimerHandle = hs.timer.doAfter(0.3, function() lastCursorPosition = nil end)
 end
--- hs.hotkey.bind({"ctrl"}, "w", nil, nil, function() -- key repeat version
 
-hs.hotkey.bind({"ctrl"}, "w",
-function() -- key press
-    -- log.i("Ctrl + W pressed")
-    lastCursorPosition = hs.mouse.absolutePosition()
-    moveTimerHandle = hs.timer.doEvery(0.03, moveWindow)
-end,
-function() -- key release
-    -- log.i("Ctrl + W released")
-    if moveTimerHandle then
-      moveTimerHandle:stop()
-    end
-end)
-
-
-resizeTimerHandle = nil
 function resizeWindow()
-    local window = hs.window.frontmostWindow()
+    local window = dragging_win
     local frame = window:frame()
 
     local currentCursorPosition = hs.mouse.absolutePosition()
@@ -63,29 +62,42 @@ function resizeWindow()
         window:setFrame(frame, 0.01) -- 0.01 = 50 ms animation time
     end
     lastCursorPosition = currentCursorPosition
-
-    -- key repeat version
-    -- if resizeTimerHandle then
-    --     resizeTimerHandle:stop()
-    -- end
-    -- resizeTimerHandle = hs.timer.doAfter(0.3, function() lastCursorPosition = nil end)
 end
--- hs.hotkey.bind({"ctrl"}, "w", nil, nil, function() -- key repeat version
 
 lastCursorPosition = nil
+moveTimerHandle = nil
 resizeTimerHandle = nil
-hs.hotkey.bind({"option"}, "w",
-function() -- key press
-    -- log.i("Ctrl + W pressed")
+
+flags_event = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(e)
+  local flags = e:getFlags()
+  if flags.ctrl and flags.shift and dragging_win == nil then
+    dragging_win = get_window_under_mouse()
+    -- dragging_win:raise()
+    dragging_win:focus()
+    dragging_mode = 1
+    lastCursorPosition = hs.mouse.absolutePosition()
+    moveTimerHandle = hs.timer.doEvery(0.03, moveWindow)
+  elseif flags.alt and flags.shift and dragging_win == nil then
+    dragging_win = get_window_under_mouse()
+    -- dragging_win:raise()
+    dragging_win:focus()
+    dragging_mode = 2
     lastCursorPosition = hs.mouse.absolutePosition()
     resizeTimerHandle = hs.timer.doEvery(0.03, resizeWindow)
-end,
-function() -- key release
-    -- log.i("Ctrl + W released")
+  else
     if resizeTimerHandle then
       resizeTimerHandle:stop()
     end
+    if moveTimerHandle then
+      moveTimerHandle:stop()
+    end
+    dragging_win = nil
+  end
+  return nil
 end)
+flags_event:start()
 end
+
+
 
 return obj
