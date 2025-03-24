@@ -22,3 +22,5 @@ hs.hotkey.bind({"ctrl"}, "§", function()
   app:mainWindow():setTopLeft(hs.geometry.point(400,0))
   app:mainWindow():setSize(hs.geometry.size(800,400))
 end)
+
+hs.loadSpoon("MalthesMoveWindow")
