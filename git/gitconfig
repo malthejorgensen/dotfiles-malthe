@@ -5,7 +5,7 @@
 	# See: http://stackoverflow.com/a/17045911/118608
 [core]
 	editor = /usr/bin/vim
-	excludesfile = /Users/malthe/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	mergetool = sublime
 	# mergetool = gvimdiff
 [user]
@@ -22,7 +22,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Users/malthe/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = ~/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [mergetool "sublime"]
 	cmd = /usr/bin/env subl --new-window --wait \"$MERGED\"; git add \"$MERGED\"
