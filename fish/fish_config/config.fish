@@ -448,6 +448,7 @@ fish_add_path -g "/opt/homebrew/opt/openjdk/bin"
 
 # Docker
 fish_add_path -g "$HOME/.docker/bin"
+fish_add_path -g "/Applications/Docker.app/Contents/Resources/bin" # Docker Desktop
 
 # DEPRECATED: Custom installation dir for `brew cask` (I don't do this anymore)
 # Use Homebrew Postgres v11 instead of v12 for now
