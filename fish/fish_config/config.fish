@@ -435,6 +435,9 @@ fish_add_path -g "$HOME/.composer/vendor/bin"
 # chruby
 #source /usr/local/share/chruby/chruby.fish
 
+# OpenJDK / Java
+fish_add_path -g "/opt/homebrew/opt/openjdk/bin"
+
 # # nvm
 # export NVM_DIR="$HOME/.nvm"
 # function nvm
