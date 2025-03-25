@@ -9,6 +9,9 @@ set -Ux LANG en_US.UTF-8
 # See: https://stackoverflow.com/q/66283714/118608
 set -Ux EDITOR vim
 
+set -Ux SHELL /opt/homebrew/bin/fish
+set -gx SHELL /opt/homebrew/bin/fish
+
 # `less` config
 # -S: Don't wrap lines
 # -R: Allow colored input (parse ANSI codes)
