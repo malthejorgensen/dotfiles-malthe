@@ -420,6 +420,9 @@ source ~/.asdf/asdf.fish
 #   source (brew --prefix asdf)/libexec/asdf.fish
 # end
 
+# mise
+fish_add_path -g "$HOME/.local/share/mise/shims"
+
 # poetry
 fish_add_path -g "$HOME/.local/bin" 
 
