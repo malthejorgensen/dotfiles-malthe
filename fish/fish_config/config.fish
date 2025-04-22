@@ -12,6 +12,13 @@ set -Ux EDITOR vim
 set -Ux SHELL /opt/homebrew/bin/fish
 set -gx SHELL /opt/homebrew/bin/fish
 
+# Make fish the default shell on macOS (yes, this is _mostly_ safe)
+# > sudo vim /etc/shells
+# Put in a line with `/opt/homebrew/bin/fish`
+# Save and quit (:wq)
+# > chsh -s /opt/homebrew/bin/fish
+
+
 # `less` config
 # -S: Don't wrap lines
 # -R: Allow colored input (parse ANSI codes)
