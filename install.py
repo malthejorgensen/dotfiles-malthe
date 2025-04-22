@@ -85,6 +85,10 @@ def check_file(full_path_source, full_path_target, verbose):
             print('%s does not exist.' % (full_path_target,))
         return False
 
+    # Strip ending "/" as symlink operations don't work with paths ending in "/"
+    if full_path_target.endswith('/'):
+        full_path_target = full_path_target.rstrip('/')
+
     if not os.path.islink(full_path_target):
         if verbose:
             print('%s exists but is not a symlink.' % (full_path_target,))
