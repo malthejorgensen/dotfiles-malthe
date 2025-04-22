@@ -414,7 +414,7 @@ fish_add_path -g '/usr/local/lib/ruby/gems/2.7.0/bin'
 # set --export HOMEBREW_CASK_OPTS "--appdir=~/Applications"
 
 # ASDF
-source ~/.asdf/asdf.fish
+# source ~/.asdf/asdf.fish
 # ASDF Homebrew install
 # if type -q brew
 #   source (brew --prefix asdf)/libexec/asdf.fish
