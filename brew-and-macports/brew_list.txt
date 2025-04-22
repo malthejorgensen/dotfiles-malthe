@@ -20,6 +20,9 @@ reattach-to-user-namespace
 awscli
 gh
 
+# More CLI-foo
+xsv
+
 # Casks
 alfred
 bettertouchtool
