@@ -1,3 +1,13 @@
+
+### Good guides on setting up
+
+- [AWS Startup Security Baseline](https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-startup-security-baseline/welcome.html)
+- [SST v2 AWS guide](https://v2.sst.dev/setting-up-aws)
+
+Note that for my personal account I don't actually use any of these.
+I use 2FA for the root account, and then I use an IAM User under that for my
+day-to-day use.
+
 ### Notes
 AWS CLI (both v1 and v2) use the credentials stored in `~/.aws/credentials` by default.
 I use a symbolic link to point to various other credential files in this directory, to allow easily switching between different users or AWS accounts.
