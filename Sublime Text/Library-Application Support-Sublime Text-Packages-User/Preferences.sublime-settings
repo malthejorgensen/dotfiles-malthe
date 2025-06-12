@@ -1,6 +1,12 @@
 {
 	"auto_find_in_selection": true,
-	"color_scheme": "Packages/Color Scheme - Legacy/Solarized (Light).tmTheme",
+  // Use the `light_color_scheme` and `dark_color_scheme`
+	"color_scheme": "auto",
+	"light_color_scheme": "Packages/Color Scheme - Legacy/Solarized (Light).tmTheme",
+	"dark_color_scheme": "Monokai.sublime-color-scheme",
+	// For doing dark mode themes, use `"theme": "auto"` and the `light_theme` and `dark_theme modes
+	"theme": "Default.sublime-theme",
+
 	"draw_white_space": ["selection_all", "isolated_all", "trailing_all", "leading_tabs"],
 	"folder_exclude_patterns":
 	[
@@ -36,7 +42,6 @@
 	"sublack.black_on_save": true,
 	"sublack.black_skip_string_normalization": true,
 	"tab_size": 2,
-	"theme": "Default.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": false,
 	"vintageous_use_ctrl_keys": true,
