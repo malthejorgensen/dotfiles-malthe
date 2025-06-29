@@ -153,6 +153,9 @@ alias where 'which -a'
 # Don't wait for Emacs at the commandline
 alias emacsclient 'emacsclient -n'
 
+# Easily produce a filename like "2025-06-20-11-20-output-of-command.log"
+alias logdate "date '+%Y-%m-%d-%H-%M'"
+
 # git shortcuts
 alias gc 'git checkout'
 alias gco 'git checkout'
