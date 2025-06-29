@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "Cursor (settings.json)",
+    "type": "symlink",
+    "source": "./settings.json",
+    "target": "~/Library/Application Support/Cursor/User/settings.json"
+  },
+  {
+    "comment": "Cursor (keybindings.json)",
+    "type": "symlink",
+    "source": "./keybindings.json",
+    "target": "~/Library/Application Support/Cursor/User/keybindings.json"
+  }
+]
