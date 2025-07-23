@@ -179,6 +179,7 @@ function git-rebase-origin
 alias git-safe-pull git-rebase-origin
 alias gpr git-safe-pull
 alias git-merge-cleanup 'find -E . -regex \'.*_(BACKUP|BASE|LOCAL|REMOTE)_[0-9]{4}\.[^\.]+\' -print0 | xargs -0 rm'
+alias gds "git diff --stat"
 alias gdo "git diff origin/(gb)"
 alias gfo 'git fetch origin'
 alias gcp 'git cherry-pick'
