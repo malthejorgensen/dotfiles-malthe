@@ -8,6 +8,10 @@
         "key": "ctrl+shift+tab",
         "command": "workbench.action.previousEditor"
     },
+    {
+        "key": "cmd+j",
+        "command": "editor.action.joinLines"
+    },
     // {
     //     "key": "escape",
     //     "command": "cursor.closeChatPanel",
@@ -18,9 +22,9 @@
         "command": "workbench.action.closePanel",
         "when": "panelVisible"
     },
-    {
-        "key": "escape",
-        "command": "workbench.action.closeAuxiliaryBar",
-        "when": "auxiliaryBarVisible"
-    }
+    // {
+    //     "key": "escape",
+    //     "command": "workbench.action.closeAuxiliaryBar",
+    //     "when": "auxiliaryBarVisible"
+    // }
 ]

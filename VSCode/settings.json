@@ -32,6 +32,110 @@
             "after": [
                 "l"
             ]
+        },
+        {
+            "before": [
+                "J"
+            ],
+            "after": [
+                "0"
+            ]
+        },
+        {
+            "before": [
+                ":"
+            ],
+            "after": [
+                "$"
+            ]
         }
-    ]
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "j"
+            ],
+            "after": [
+                "h"
+            ]
+        },
+        {
+            "before": [
+                "k"
+            ],
+            "after": [
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "l"
+            ],
+            "after": [
+                "k"
+            ]
+        },
+        {
+            "before": [
+                ";"
+            ],
+            "after": [
+                "l"
+            ]
+        },
+        {
+            "before": [
+                "J"
+            ],
+            "after": [
+                "0"
+            ]
+        },
+        {
+            "before": [
+                ":"
+            ],
+            "after": [
+                "$"
+            ]
+        }
+    ],
+    "window.autoDetectColorScheme": true,
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.preferredLightColorTheme": "Solarized Light",
+    "workbench.preferredDarkColorTheme": "Cursor Dark", // "Solarized Dark", // Cursor Dark
+    "editor.multiCursorModifier": "ctrlCmd",
+    "cursor.composer.shouldAllowCustomModes": true,
+    "editor.formatOnSave": true,
+    "editor.tokenColorCustomizations": {
+        "[Solarized Light]": {
+            "class": "#229977",
+        },
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "[Solarized Light]": {
+            "enabled": true,
+            "rules": {
+                // "*.declaration": { "bold": true },
+                // "*": {
+                //     "foreground": "#666", // 75% gray to match SublimeText
+                // }
+                "class": {
+                    // "bold": true,
+                    // "foreground": "#f09b9b", # pinkish
+                    "foreground": "#9ba5f0",
+                },
+                "variable": {
+                    "foreground": "#666", // 75% gray to match SublimeText
+                },
+            },
+        },
+        "[Monokai]": {
+            "enabled": true,
+            "rules": {
+                // Underline highligths classes too much (distracting)
+                "class": { "underline": false },
+            },
+        },
+    },
 }
