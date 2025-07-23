@@ -18,6 +18,12 @@
     "target": "~/bin/html-prettify"
   },
   {
+    "comment": "",
+    "type": "symlink",
+    "source": "./delete-merged-branches",
+    "target": "~/bin/delete-merged-branches"
+  },
+  {
     "comment": "Sublime Text `subl`-command",
     "type": "symlink",
     "source": "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl",
