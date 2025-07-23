@@ -471,4 +471,4 @@ set -Ux DOCKER_DEFAULT_PLATFORM linux/arm64
 # set -Ux PGDATA '/usr/local/var/postgres11.1'
 
 # direnv
-direnv hook fish | source
+type -q -f direnv; and direnv hook fish | source
