@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./settings.json",
+    "target": "~/.claude/settings.json"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./hooks/",
+    "target": "~/.claude/hooks/"
+  }
+]
