@@ -53,6 +53,15 @@ config.keys = {
     mods = 'SHIFT',
     action = wezterm.action.MoveTabRelative(1)
   },
+  {
+    key = 'Enter',
+    mods = 'ALT',
+    -- Claude Code needs Alt + Enter for newlines, but Wezterm's default is to
+    -- "full screen" the window on that keypress
+    -- Default: action = wezterm.action.ToggleFullScreen
+    action = wezterm.action.DisableDefaultAssignment
+    -- action = wezterm.action.Disable
+  },
 }
 
 return config
