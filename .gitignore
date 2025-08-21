@@ -4,6 +4,9 @@
 /karabiner/karabiner/automatic_backups/
 /vim/.vim/bundle/
 
+# fish "universal" variables
+/fish/fish_config/fish_variables
+
 # Auto-generated files
 /Sublime Text/Library-Application Support-Sublime Text-Packages-User/SublimeLinter/*.tmtheme
 /Sublime Text/Library-Application Support-Sublime Text-Packages-User/ANSIescape/ansi.sublime-color-scheme
