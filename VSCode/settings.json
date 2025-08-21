@@ -134,8 +134,11 @@
             "enabled": true,
             "rules": {
                 // Underline highligths classes too much (distracting)
-                "class": { "underline": false },
+                "class": {
+                    "underline": false
+                },
             },
         },
     },
+    "workbench.activityBar.location": "top",
 }
