@@ -232,6 +232,11 @@ end
 function gt
   git checkout (gtp)
 end
+function ggt
+  # `git grep` excluding any test files
+  # git grep $argv -- ':!*/tests/*' ':!test_*'
+  git grep $argv -- ':!**/test_*'
+end
 
 
 function smart-rebase
