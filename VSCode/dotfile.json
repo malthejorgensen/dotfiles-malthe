@@ -3,12 +3,12 @@
     "comment": "VSCode (settings.json)",
     "type": "symlink",
     "source": "./settings.json",
-    "target": "~/Library/Application Support/VSCode/User/settings.json"
+    "target": "~/Library/Application Support/Code/User/settings.json"
   },
   {
     "comment": "VSCode (keybindings.json)",
     "type": "symlink",
     "source": "./keybindings.json",
-    "target": "~/Library/Application Support/VSCode/User/keybindings.json"
+    "target": "~/Library/Application Support/Code/User/keybindings.json"
   }
 ]
