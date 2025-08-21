@@ -31,3 +31,4 @@ gitx
 karabiner-elements
 sublime-text
 wezterm
+qlmarkdown
