@@ -32,3 +32,4 @@ karabiner-elements
 sublime-text
 wezterm
 qlmarkdown
+google-chrome
