@@ -114,6 +114,32 @@ def check_file(full_path_source, full_path_target, verbose):
     return False
 
 
+def import_file(full_path_source, full_path_target):
+    # type: (str, str) -> None
+    full_path_target += '.import'
+
+    if not os.path.exists(full_path_source):
+        print('%s does not exist. Not importing.' % (full_path_source,))
+        return
+
+    if os.path.exists(full_path_target):
+        print('%s already exist. Import would overwrite. Skipping.' % (full_path_target,))
+        return
+
+    print('Copying %s to %s' % (full_path_source, full_path_target))
+    if os.path.isdir(full_path_source):
+        shutil.copytree(
+            full_path_source,
+            full_path_target,
+        )
+    else:
+        shutil.copy2(
+            full_path_source,
+            full_path_target,
+            follow_symlinks=False,
+        )
+
+
 def uninstall_file(full_path_source, full_path_target):
     # type: (str, str) -> None
     if not os.path.exists(full_path_target):
@@ -166,6 +192,12 @@ parser.add_argument(
     help='Do not install new config files, only replace existing ones',
 )
 parser.add_argument(
+    '--import',
+    action='store_true',
+    dest='_import',
+    help='Import existing dotfiles for selected apps (pass --all to select all apps)',
+)
+parser.add_argument(
     '--uninstall',
     action='store_true',
     help='Uninstall dotfiles for selected apps (pass --all to select all apps)',
@@ -216,6 +248,8 @@ for app_dir in app_dirs:
                     )
                 elif args.uninstall:
                     uninstall_file(full_path_source, full_path_target)
+                elif args._import:
+                    import_file(full_path_target, full_path_source)
                 else:
                     create_symlink(
                         full_path_source,
