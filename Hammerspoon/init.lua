@@ -1,7 +1,9 @@
-function postitionQuakeTerminal(window)
+function postitionQuakeTerminal(window, screenSize)
+    local windowSize = hs.geometry.size(800,400)
+    local fromLeft = (screenSize.w / 2) - (windowSize.w / 2)
     -- Position and size window
-    window:setTopLeft(hs.geometry.point(400,0))
-    window:setSize(hs.geometry.size(800,400))
+    window:setTopLeft(hs.geometry.point(fromLeft,0))
+    window:setSize(windowSize)
 end
 
 
@@ -39,7 +41,10 @@ hs.hotkey.bind({"ctrl"}, "§", function()
             window:moveToScreen(targetScreen, false, true, 0)
         end
     else
-        postitionQuakeTerminal(window)
+        local currentScreen = window:screen()
+        local targetScreen = screens[2]
+        local screenSize = currentScreen:frame()
+        postitionQuakeTerminal(window, screenSize)
     end
 end)
 
