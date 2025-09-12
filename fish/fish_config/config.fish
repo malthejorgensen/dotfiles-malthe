@@ -237,6 +237,10 @@ function ggt
   # git grep $argv -- ':!*/tests/*' ':!test_*'
   git grep $argv -- ':!**/test_*'
 end
+function grex
+  echo "/$argv[1]/$argv[2]/"
+  uvx repx -i "/$argv[1]/$argv[2]/" (git grep -l "$argv[1]")
+end
 
 
 function smart-rebase
