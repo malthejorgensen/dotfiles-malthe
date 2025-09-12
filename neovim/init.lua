@@ -11,18 +11,22 @@ end
 Map("n", "<Space>", ":")
 Map("v", "<Space>", ":")
 
--- Easily go to the beginning and of line
-Map("n", ":", "$")
-Map("n", "J", "^")
 
--- Home-row navigation
-Map("n", "j", "h")
-Map("n", "k", "j")
-Map("n", "l", "k")
-Map("n", ";", "l")
--- Danish
-Map("n", "æ", "l")
-Map("n", "-", "/")
+modes = {"n", "v", "o"}
+for i, mode in ipairs(modes) do
+  -- Easily go to the beginning and of line
+  Map("n", ":", "$")
+  Map("n", "J", "^")
+  --
+  -- Home-row navigation
+  Map(mode, "j", "h")
+  Map(mode, "k", "j")
+  Map(mode, "l", "k")
+  Map(mode, ";", "l")
+  -- Danish
+  Map(mode, "æ", "l")
+  Map(mode, "-", "/")
+end
 
 Map("n", ",j", "J")
 
