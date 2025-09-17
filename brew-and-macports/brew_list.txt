@@ -25,7 +25,6 @@ xsv
 
 # Casks
 alfred
-bettertouchtool
 caffeine
 gitx
 karabiner-elements
