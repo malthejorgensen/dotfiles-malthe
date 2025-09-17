@@ -1,0 +1,8 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./config.json",
+    "target": "~/.docker/config.json"
+  }
+]
