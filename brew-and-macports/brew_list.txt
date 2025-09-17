@@ -4,8 +4,12 @@ git
 
 # My CLI setup
 fish
+neovim
+mise
 tig
 tmux
+vim
+uv
 
 # Modern "UNIX" tools
 fd
@@ -21,6 +25,8 @@ awscli
 gh
 
 # More CLI-foo
+ast-grep
+pstree
 xsv
 
 # Casks
