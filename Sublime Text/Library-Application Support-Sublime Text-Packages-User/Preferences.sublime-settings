@@ -43,7 +43,7 @@
 	"sublack.black_skip_string_normalization": true,
 	"tab_size": 2,
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": false,
+	"trim_trailing_white_space_on_save": "all",
 	"vintageous_use_ctrl_keys": true,
 	"vintageous_use_super_keys": false,
 	"word_wrap": false,
