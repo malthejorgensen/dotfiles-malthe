@@ -482,3 +482,7 @@ set -Ux DOCKER_DEFAULT_PLATFORM linux/arm64
 
 # direnv
 type -q -f direnv; and direnv hook fish | source
+
+# Claude Code: Make it stay in the initial directory always
+# -- this _should_ help it not getting confused about where it is.
+set -Ux CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR 1
