@@ -32,6 +32,12 @@
   {
     "comment": "",
     "type": "symlink",
+    "source": "./DeleteFile",
+    "target": "~/Library/Application Support/Sublime Text/Packages/DeleteFile"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
     "source": "./NeoVintageous",
     "target": "~/Library/Application Support/Sublime Text/Packages/NeoVintageous"
   }
