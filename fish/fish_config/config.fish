@@ -474,6 +474,9 @@ fish_add_path -g "$HOME/.docker/bin"
 fish_add_path -g "/Applications/Docker.app/Contents/Resources/bin" # Docker Desktop
 set -Ux DOCKER_DEFAULT_PLATFORM linux/arm64
 
+# rustup
+source "$HOME/.cargo/env.fish"
+
 # DEPRECATED: Custom installation dir for `brew cask` (I don't do this anymore)
 # Use Homebrew Postgres v11 instead of v12 for now
 # set -g fish_user_paths "/usr/local/opt/postgresql@11/bin" $fish_user_paths
