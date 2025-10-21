@@ -239,7 +239,7 @@ function ggt
 end
 function grex
   echo "/$argv[1]/$argv[2]/"
-  uvx repx -i "/$argv[1]/$argv[2]/" (git grep -l "$argv[1]")
+  uvx repx -i "/$argv[1]/$argv[2]/" (git grep -E -l "$argv[1]")
 end
 
 
