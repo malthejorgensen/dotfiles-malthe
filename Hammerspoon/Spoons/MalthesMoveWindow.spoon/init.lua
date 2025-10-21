@@ -28,6 +28,7 @@ end
 
 dragging_win = nil
 dragging_mode = 1
+has_already_focused = false
 
 lastCursorPosition = nil
 moveTimerHandle = nil
@@ -40,6 +41,12 @@ function moveWindow()
     if lastCursorPosition then
         local deltaX = currentCursorPosition.x - lastCursorPosition.x
         local deltaY = currentCursorPosition.y - lastCursorPosition.y
+
+        if not has_already_focused and (deltaX > 0 or deltaX > 0) then
+          window:raise()
+          window:focus()
+          has_already_focused = true
+        end
 
         frame.x = frame.x + deltaX
         frame.y = frame.y + deltaY
@@ -57,6 +64,12 @@ function resizeWindow()
         local deltaX = currentCursorPosition.x - lastCursorPosition.x
         local deltaY = currentCursorPosition.y - lastCursorPosition.y
 
+        if not has_already_focused and (deltaX > 0 or deltaX > 0) then
+          window:raise()
+          window:focus()
+          has_already_focused = true
+        end
+
         frame.w = frame.w + deltaX
         frame.h = frame.h + deltaY
         window:setFrame(frame, 0.01) -- 0.01 = 50 ms animation time
@@ -72,15 +85,11 @@ flags_event = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function
   local flags = e:getFlags()
   if flags.ctrl and flags.shift and dragging_win == nil then
     dragging_win = get_window_under_mouse()
-    -- dragging_win:raise()
-    dragging_win:focus()
     dragging_mode = 1
     lastCursorPosition = hs.mouse.absolutePosition()
     moveTimerHandle = hs.timer.doEvery(0.03, moveWindow)
   elseif flags.alt and flags.shift and dragging_win == nil then
     dragging_win = get_window_under_mouse()
-    -- dragging_win:raise()
-    dragging_win:focus()
     dragging_mode = 2
     lastCursorPosition = hs.mouse.absolutePosition()
     resizeTimerHandle = hs.timer.doEvery(0.03, resizeWindow)
@@ -92,6 +101,7 @@ flags_event = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function
       moveTimerHandle:stop()
     end
     dragging_win = nil
+    has_already_focused = false
   end
   return nil
 end)
