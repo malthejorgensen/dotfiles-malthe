@@ -1,37 +1,33 @@
 {
-    "hooks":
-    {
-        "Stop":
-        [
-            {
-                "matcher": "",
-                "hooks":
-                [
-                    {
-                        "type": "command",
-                        "command": "~/.claude/hooks/notify_when_stopped.py"
-                    }
-                ]
-            }
-        ],
-        "Notification":
-        [
-            {
-                "matcher": "",
-                "hooks":
-                [
-                    {
-                        "type": "command",
-                        "command": "~/.claude/hooks/notify_when_stopped.py"
-                    }
-                ]
-            }
+  "permissions": {
+    "deny": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/notify_when_stopped.py"
+          }
         ]
-    },
-    "permissions": {
-        "deny": [
-            "Bash(git commit:*)",
-            "Bash(git push:*)"
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/notify_when_stopped.py"
+          }
         ]
-    }
+      }
+    ]
+  },
+  "alwaysThinkingEnabled": false
 }
