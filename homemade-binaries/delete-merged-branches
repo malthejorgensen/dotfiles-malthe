@@ -11,6 +11,12 @@ function delete_merged_branches
                 set default_branch $branch
                 break
             end
+            if test -z "$default_branch"
+                if git show-ref --verify --quiet refs/heads/$branch
+                    set default_branch $branch
+                    break
+                end
+            end
         end
         
         if test -z "$default_branch"
