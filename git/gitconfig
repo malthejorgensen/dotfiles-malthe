@@ -27,6 +27,10 @@
 [mergetool "sublime"]
 	cmd = /usr/bin/env subl --new-window --wait \"$MERGED\"; git add \"$MERGED\"
 	trustExitCode = true
+[mergetool "unconflict"]
+  # "bottom" chooses the code from _this_ branch (not `main`/`master`) when rebasing
+	cmd = ~/bin/git-unconflict bottom \"$MERGED\" #; git add \"$MERGED\"
+	trustExitCode = true
 [rerere]
 	enabled = true
 [filter "lfs"]
