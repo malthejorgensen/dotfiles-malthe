@@ -34,19 +34,19 @@ function delete_merged_branches
     git fetch --prune
     
     set -l merged_branches
-    # # Get branches merged into the default branch
-    # echo
-    # echo "Finding branches merged into $default_branch..."
-    # set -l merged_branches (git branch --merged origin/$default_branch | grep -v "^\*" | grep -v $default_branch | string trim)
-    # 
-    # if test (count $merged_branches) -eq 0
-    #     echo "No merged branches found."
-    # else
-    #     echo "Branches merged into $default_branch:"
-    #     for branch in $merged_branches
-    #         echo "  - $branch"
-    #     end
-    # end
+    # Get branches merged into the default branch
+    echo
+    echo "Finding branches merged into $default_branch..."
+    set -l merged_branches (git branch --merged $default_branch | grep -v "^\*" | grep -v $default_branch | string trim)
+    
+    if test (count $merged_branches) -eq 0
+        echo "No merged branches found."
+    else
+        echo "Branches merged into $default_branch:"
+        for branch in $merged_branches
+            echo "  - $branch"
+        end
+    end
     
     # Check for branches with merged PRs (GitHub)
     echo
