@@ -27,4 +27,27 @@
     //     "command": "workbench.action.closeAuxiliaryBar",
     //     "when": "auxiliaryBarVisible"
     // }
+    // Jupyter Notebook: Disable going up to previous cell when pressing "j" when at the top of a cell.
+    //                 : Disable going up to next cell when pressing "k" when at the bottom of a cell.
+    {
+        "key": "j",
+        "command": "-notebook.focusNextEditor",
+        "when": "editorTextFocus && inputFocus && notebookEditorFocused && vim.mode == 'Normal' && notebookEditorCursorAtBoundary != 'none' && notebookEditorCursorAtBoundary != 'top'"
+    },
+    {
+        "key": "k",
+        "command": "-notebook.focusPreviousEditor",
+        "when": "editorTextFocus && inputFocus && notebookEditorFocused && vim.mode == 'Normal' && notebookEditorCursorAtBoundary != 'bottom' && notebookEditorCursorAtBoundary != 'none'"
+    },
+    // Jupyter Notebook: Move up and down between cells (after having pressed <Esc>)
+    {
+        "key": "k",
+        "command": "list.focusDown",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "l",
+        "command": "list.focusUp",
+        "when": "listFocus && !inputFocus"
+    },
 ]
