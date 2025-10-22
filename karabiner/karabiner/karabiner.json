@@ -175,6 +175,19 @@
                             "to": [{ "key_code": "right_control" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_apple": true,
+                        "is_built_in_keyboard": true,
+                        "location_id": 106
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "right_option" },
+                            "to": [{ "key_code": "right_control" }]
+                        }
+                    ]
                 }
             ],
             "fn_function_keys": [
