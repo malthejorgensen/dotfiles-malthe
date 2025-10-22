@@ -176,19 +176,39 @@
                         }
                     ]
                 },
-                {
-                    "identifiers": {
-                        "is_apple": true,
-                        "is_built_in_keyboard": true,
-                        "location_id": 106
-                    },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "right_option" },
-                            "to": [{ "key_code": "right_control" }]
-                        }
-                    ]
-                }
+                // New Macbook Pro keyboard
+                //
+                // Solution A
+                // - the below doesn't work as the `is_apple`/`is_built_in_keyboard`/`location_id`
+                //   aren't actual identifiers that can be matched on. You can see this in the
+                //   Karabiner-Elements EventViewer -- they do show, but not in the
+                // `identifiers`-object.
+                // {
+                //     "identifiers": {
+                //         "is_apple": true,
+                //         "is_built_in_keyboard": true,
+                //         "location_id": 106
+                //     },
+                //     "simple_modifications": [
+                //         {
+                //             "from": { "key_code": "right_option" },
+                //             "to": [{ "key_code": "right_control" }]
+                //         }
+                //     ]
+                // },
+                // Solution B
+                // - does work, but likely applies to any keyboard -- including external ones
+                //   which is exactly what we _don't_ want as those have a Ctrl-button on the
+                //   right-hand side already.
+                // {
+                //     "identifiers": { "is_keyboard": true },
+                //     "simple_modifications": [
+                //         {
+                //             "from": { "key_code": "right_option" },
+                //             "to": [{ "key_code": "right_control" }]
+                //         }
+                //     ]
+                // }
             ],
             "fn_function_keys": [
                 {
