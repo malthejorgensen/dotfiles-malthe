@@ -1,4 +1,5 @@
-Include /Users/malthe/.colima/ssh_config
+# %d means $HOME
+Include /Users/%d/.colima/ssh_config
 
 Host *
     # OS X 10.12 (Sierra): Make `ssh-agent` work
