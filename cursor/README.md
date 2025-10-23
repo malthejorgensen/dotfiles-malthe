@@ -1,7 +1,7 @@
 
 Keyboard shortcuts
 ------------------
-Open chat: Cmd + L
+Open chat: Cmd + L or Opt + Cmd + B
 
 
 Custom modes
