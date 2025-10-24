@@ -494,6 +494,6 @@ set -Ux CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR 1
 
 # OpenAI Codex: Use `.codex/config.toml` in current directory
 # -- as of 2025-10-01 `codex` doesn't have per-project settings
-function codex
+function codex-local
   env CODEX_HOME="$(pwd)/.codex" codex $argv
 end
