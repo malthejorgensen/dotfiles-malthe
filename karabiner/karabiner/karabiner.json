@@ -146,6 +146,24 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                      "description": "New Macbook: Map right Opt to Ctrl",
+                      "manipulators": [
+                        {
+                          "type": "basic",
+                          "from": { "key_code": "right_option" },
+                          "to": [{ "key_code": "right_control" }],
+                          "conditions": [
+                            {
+                              "type": "device_if",
+                              "identifiers": [{
+                                  "location_id": 106
+                              }]
+                            }
+                          ]
+                        }
+                      ]
                     }
                 ]
             },
@@ -175,7 +193,7 @@
                             "to": [{ "key_code": "right_control" }]
                         }
                     ]
-                },
+                }
                 // New Macbook Pro keyboard
                 //
                 // Solution A
@@ -185,9 +203,9 @@
                 // `identifiers`-object.
                 // {
                 //     "identifiers": {
-                //         "is_apple": true,
-                //         "is_built_in_keyboard": true,
-                //         "location_id": 106
+                //         // "is_apple": true, // <-- Karabiner does not do matching on this property
+                //         // "is_built_in_keyboard": true // <-- Karabiner _does_ do matching on this property, but it doesn't work in this case
+                //         // "location_id": 106
                 //     },
                 //     "simple_modifications": [
                 //         {
@@ -195,7 +213,7 @@
                 //             "to": [{ "key_code": "right_control" }]
                 //         }
                 //     ]
-                // },
+                // }
                 // Solution B
                 // - does work, but likely applies to any keyboard -- including external ones
                 //   which is exactly what we _don't_ want as those have a Ctrl-button on the
@@ -209,6 +227,8 @@
                 //         }
                 //     ]
                 // }
+                // Solution C
+                // - use the "New Macbook: Map right Opt to Ctrl" in `complex_modifications`.
             ],
             "fn_function_keys": [
                 {
