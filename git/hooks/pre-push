@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+# Pre-push hook to prevent pushing commits with:
+# - Commit messages starting with "!"
+# - Commit messages containing "WIP" (case-insensitive)
+# - Commit messages containing "fixup"
+
+set -e
+set -u
+set -o pipefail
+
+# Since we've set `hooksDir` in ~/.gitconfig, w we want
+GIT_REPO_DIR_ABSOLUTE="$(git rev-parse --show-toplevel)"
+GIT_DOT_DIR_RELATIVE="$(git rev-parse --git-common-dir)" # $GIT_DIR is no longer set in hooks (https://stackoverflow.com/a/53121209/118608)
+GIT_DIR="$GIT_REPO_DIR_ABSOLUTE/$GIT_DOT_DIR_RELATIVE"
+
+if [ -f "$GIT_DIR/hooks/pre-push" ]; then
+    "$GIT_DIR/hooks/pre-push"
+fi
+
+# Read stdin to get the list of commits being pushed
+# Format: <local ref> <local sha1> <remote ref> <remote sha1>
+while read local_ref local_sha remote_ref remote_sha; do
+    # Skip if we're deleting a branch
+    if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
+        continue
+    fi
+
+    # If the remote ref doesn't exist yet (new branch), compare against main/master
+    if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+        # Find the base branch (main or master)
+        if git show-ref --verify --quiet refs/heads/main; then
+            base_branch="main"
+        elif git show-ref --verify --quiet refs/heads/master; then
+            base_branch="master"
+        else
+            # No main/master found, check all commits on this branch
+            base_branch=""
+        fi
+
+        if [ -n "$base_branch" ]; then
+            # Check commits that are on this branch but not on base branch
+            range="$base_branch..$local_sha"
+            commits=$(git rev-list "$range")
+        else
+            # Fallback: check all commits on this branch
+            commits=$(git rev-list "$local_sha" --not --remotes --not --branches | head -100)
+        fi
+    else
+        # For existing branches, check commits between remote and local
+        range="$remote_sha..$local_sha"
+        commits=$(git rev-list "$range")
+    fi
+
+    # Check each commit message
+    for commit in $commits; do
+        message=$(git log -1 --format=%s "$commit")
+
+        # Check if message starts with "!"
+        if [[ "$message" =~ ^! ]]; then
+            echo "ERROR: Commit message starts with '!': $message"
+            echo "Commit: $commit"
+            echo ""
+            echo "Push rejected. Please amend or reword the commit."
+            exit 1
+        fi
+
+        # Check if message contains "WIP" (case insensitive)
+        if [[ "$message" =~ [Ww][Ii][Pp] ]]; then
+            echo "ERROR: Commit message contains 'WIP': $message"
+            echo "Commit: $commit"
+            echo ""
+            echo "Push rejected. Please finish the work or reword the commit."
+            exit 1
+        fi
+
+        # Check if message contains "fixup"
+        if [[ "$message" =~ fixup ]]; then
+            echo "ERROR: Commit message contains 'fixup': $message"
+            echo "Commit: $commit"
+            echo ""
+            echo "Push rejected. Please squash fixup commits before pushing."
+            exit 1
+        fi
+    done
+done
+
+exit 0

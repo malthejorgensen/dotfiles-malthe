@@ -10,5 +10,11 @@
     "type": "symlink",
     "source": "./gitignore_global",
     "target": "~/.gitignore_global"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./hooks",
+    "target": "~/.git-hooks"
   }
 ]
