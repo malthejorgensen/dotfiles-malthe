@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+# Since we've set `hooksDir` in ~/.gitconfig
+GIT_REPO_DIR_ABSOLUTE="$(git rev-parse --show-toplevel)"
+GIT_DOT_DIR_RELATIVE="$(git rev-parse --git-common-dir)" # $GIT_DIR is no longer set in hooks (https://stackoverflow.com/a/53121209/118608)
+GIT_DIR="$GIT_REPO_DIR_ABSOLUTE/$GIT_DOT_DIR_RELATIVE"
+
+if [ -f "$GIT_DIR/hooks/update" ]; then
+    "$GIT_DIR/hooks/update"
+fi
+
+exit 0
