@@ -24,12 +24,10 @@
 	"font_size": 10,
 	"ignored_packages":
 	[
-		"Better CoffeeScript",
 		"Elm Syntax Highlighting",
 		"FileDiffs",
 		"GitStatusBar",
 		"isort",
-		"Six",
 		"sublack",
 		"SublimeLinter-flake8",
 		"Vintage",
