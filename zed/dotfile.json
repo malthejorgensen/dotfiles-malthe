@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./settings.json",
+    "target": "~/.config/zed/settings.json"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./keymap.json",
+    "target": "~/.config/zed/keymap.json"
+  }
+]
