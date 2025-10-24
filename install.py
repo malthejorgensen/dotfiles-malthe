@@ -253,11 +253,15 @@ for app_dir in app_dirs:
                 elif args._import:
                     import_file(full_path_target, full_path_source)
                 else:
-                    create_symlink(
-                        full_path_source,
-                        full_path_target,
-                        replace_only=args.replace_only,
+                    is_installed = check_file(
+                        full_path_source, full_path_target, verbose=True
                     )
+                    if not is_installed:
+                        create_symlink(
+                            full_path_source,
+                            full_path_target,
+                            replace_only=args.replace_only,
+                        )
             else:
                 print('Unknown type: ' + file['type'])
 
