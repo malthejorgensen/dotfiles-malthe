@@ -28,13 +28,15 @@
 		"FileDiffs",
 		"GitStatusBar",
 		"isort",
+		"JsPrettier",
 		"sublack",
-		"SublimeLinter-flake8",
-		"Vintage",
+		"SublimeLinter-eslint",
 		// "Gitignored File Excluder" (https://github.com/ExplodingCabbage/sublime-gitignorer)
 		//   is the scourge of the earth. Never install this.
 		// "sublime-text-gitignore" (https://github.com/apc999/"sublime-text-gitignore")
 		//   might be okay (since works at the project level, and doesn't auto-update)
+		"SublimeLinter-flake8",
+		"Vintage",
 	],
 	"neovintageous_build_version": 13200,
 	"sublack.black_on_save": true,
