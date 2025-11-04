@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./config.toml",
+    "target": "~/.codex/config.toml"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./notifier.py",
+    "target": "~/.codex/notifier.py"
+  }
+]
