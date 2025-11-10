@@ -34,17 +34,32 @@ def find_matching_parent_dir(needle: str):
     return relative_path
 
 
-def run_cmd(cmd: str):
+def run_cmd(cmd: str, text: bool = True, stdin: bytes | str | None = None):
     result = subprocess.run(
         cmd.split(" "),
         capture_output=True,
-        text=True,
+        text=text,
+        input=stdin,
     )
     if result.returncode != 0:
         print(result.stderr)
         exit(1)
 
     return result.stdout
+
+
+def parse_git_tree_file(contents: bytes):
+    RE_FILE = re.compile(
+        b"(?P<mode>[0-7]{5,6}) (?P<filename>[^\0]+)\0(?P<sha1>.{20})",
+        flags=re.DOTALL,
+    )
+    matches = []
+    for match in RE_FILE.finditer(contents):
+        matches.append((match.group("filename"), match.group("sha1")))
+
+    # DEBUG: print(len(matches), len(re.findall(b"\0", contents)))
+    # There are often \0 characters in the `sha1` bytes, so the \0 doesn't necessarily match.
+    return matches
 
 
 def main(file: str, all_objects: bool):
@@ -61,32 +76,39 @@ def main(file: str, all_objects: bool):
             print(object)
         return
 
-    # Find trees
-    trees = []
-    for object in objects:
-        type = run_cmd(f"git cat-file -t {object}").strip()
-        if type == "tree":
-            trees.append(object)
-
-    # Search trees
-    #
-    # Example line in a tree:
-    #
-    #    100644 blob 7b8b6e213fbfbb0f12f7913f6094f890add84916    utils.py
-    #
-    matches = set()
-    RE_FILE = re.compile(
-        rf"^(?P<file_mode>\d{{6}})\s+(?P<object_type>\w+)\s+(?P<object_hash>[0-9a-f]{{40}})\s+(?P<filename>{file})$",
-        flags=re.MULTILINE,
+    # Get contents of all trees
+    git_stdin = b"\0".join([f"contents {obj}".encode("utf8") for obj in objects])
+    trees_full = run_cmd(
+        "git cat-file --batch-command --filter=object:type=tree -Z",
+        text=False,
+        stdin=git_stdin,
     )
+
+    RE_EXCLUDED = re.compile(b"(^|\0)(?P<object_hash>[0-9a-f]{40}) excluded($|\0)")
+    trees_full = RE_EXCLUDED.sub(b"\0", trees_full)
+    # Run twice due to overlaps in matches
+    trees_full = RE_EXCLUDED.sub(b"\0", trees_full)
+
+    # DEBUG
+    # print(b"\n".join(trees_full.split(b"\0")).decode("utf-8", errors="replace"))
+    # exit()
+
+    # It's quite important that we DO NOT capture here, as any capture group
+    # will make `.split()` return a "split" group as well.
+    RE_TREE = re.compile(b"(?:^|\0)(?:[0-9a-f]{40}) tree \\d{2,3}(?:$|\0)")
+    trees = [t for t in RE_TREE.split(trees_full) if t.strip()]
+
+    # Parse trees
+    matches = set()
+    file_bytes = file.encode("utf-8")
     print(f"Found {len(trees)} trees in `.git/objects/`")
-    for tree in trees:
-        tree_content = run_cmd(f"git cat-file -p {tree}")
+    for tree_content in trees:
+        files = parse_git_tree_file(tree_content)
+        for filename, hash in files:
+            if filename == file_bytes:
+                matches.add(hash.hex())
 
-        for match in RE_FILE.finditer(tree_content):
-            object_hash = match.group("object_hash")
-            matches.add(object_hash)
-
+    # Print matches
     print(f"Found {len(matches)} in `.git/objects/`")
     for object in matches:
         object_content = run_cmd(f"git cat-file -p {object}")
