@@ -16,5 +16,11 @@
     "type": "symlink",
     "source": "./hooks",
     "target": "~/.git-hooks"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./git-search-objects",
+    "target": "~/bin/git-search-objects"
   }
 ]

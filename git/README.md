@@ -20,3 +20,11 @@ To exit vim with a non-zero exit code, enter the command:
 
 This is more of a `vim` tip but useful when you don't want to do that merge,
 cherry-pick, interactive rebase or whatever it might be.
+
+
+## Git internals (advanced)
+
+### How do I read files in `.git/objects`?
+Do
+
+  git cat-file -p <hash>

@@ -1,0 +1,98 @@
+#!/usr/bin/env -S uv run --script
+import argparse
+import os
+import re
+import subprocess
+
+
+def find_matching_parent_dir(needle: str):
+    full_path = os.getcwd()
+    relative_dirs = []
+    dirs = []
+
+    current_path = full_path
+    while True:
+        parent_dir_path = os.path.dirname(current_path)
+        parent_dir_name = os.path.basename(parent_dir_path)
+
+        if current_path == parent_dir_path:
+            # Reached the root directory
+            break
+
+        if os.path.exists(os.path.join(parent_dir_path, needle)):
+            break
+
+        relative_dirs.append("..")
+
+        dirs.append(parent_dir_name)
+        current_path = parent_dir_path
+
+    full_parts = list(reversed(dirs))
+    # relative_path = os.path.join(*full_parts)
+    relative_path = os.path.join(*relative_dirs)
+
+    return relative_path
+
+
+def run_cmd(cmd: str):
+    result = subprocess.run(
+        cmd.split(" "),
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        print(result.stderr)
+        exit(1)
+
+    return result.stdout
+
+
+def main(file: str):
+    git_dir = find_matching_parent_dir(".git")
+    object_files = run_cmd(f"find {git_dir}/objects -type f").strip().split("\n")
+    objects = [
+        o.replace(f"{git_dir}/objects/", "").replace("/", "")
+        for o in object_files
+        if "pack" not in o
+    ]
+
+    # Find trees
+    trees = []
+    for object in objects:
+        type = run_cmd(f"git cat-file -t {object}").strip()
+        if type == "tree":
+            trees.append(object)
+
+    # Search trees
+    #
+    # Example line in a tree:
+    #
+    #    100644 blob 7b8b6e213fbfbb0f12f7913f6094f890add84916    utils.py
+    #
+    matches = set()
+    RE_FILE = re.compile(
+        rf"^(?P<file_mode>\d{{6}})\s+(?P<object_type>\w+)\s+(?P<object_hash>[0-9a-f]{{40}})\s+(?P<filename>{file})$",
+        flags=re.MULTILINE,
+    )
+    print(f"Found {len(trees)} trees in `.git/objects/`")
+    for tree in trees:
+        tree_content = run_cmd(f"git cat-file -p {tree}")
+
+        for match in RE_FILE.finditer(tree_content):
+            object_hash = match.group("object_hash")
+            matches.add(object_hash)
+
+    print(f"Found {len(matches)} in `.git/objects/`")
+    for object in matches:
+        object_content = run_cmd(f"git cat-file -p {object}")
+        print(f"========================== {object} ==========================")
+        print(object_content)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser("Searches .git/objects for a particular file")
+    parser.add_argument("file", help="File to search for in git objects")
+
+    args = parser.parse_args()
+
+    main(file=args.file)
