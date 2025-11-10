@@ -47,7 +47,7 @@ def run_cmd(cmd: str):
     return result.stdout
 
 
-def main(file: str):
+def main(file: str, all_objects: bool):
     git_dir = find_matching_parent_dir(".git")
     object_files = run_cmd(f"find {git_dir}/objects -type f").strip().split("\n")
     objects = [
@@ -55,6 +55,11 @@ def main(file: str):
         for o in object_files
         if "pack" not in o
     ]
+
+    if all_objects:
+        for object in objects:
+            print(object)
+        return
 
     # Find trees
     trees = []
@@ -91,8 +96,9 @@ def main(file: str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("Searches .git/objects for a particular file")
-    parser.add_argument("file", help="File to search for in git objects")
+    parser.add_argument("file", nargs="?", help="File to search for in git objects")
+    parser.add_argument("--all-objects", action="store_true", help="All objects")
 
     args = parser.parse_args()
 
-    main(file=args.file)
+    main(file=args.file, all_objects=args.all_objects)
