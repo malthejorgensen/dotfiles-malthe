@@ -21,6 +21,16 @@ To exit vim with a non-zero exit code, enter the command:
 This is more of a `vim` tip but useful when you don't want to do that merge,
 cherry-pick, interactive rebase or whatever it might be.
 
+### How do I reformat all commits on a branch?
+
+```bash
+git rebase \
+  --strategy-option=theirs \
+  --exec '<formatting/linting command here>; git add --update; git commit --amend --no-edit' <base branch, e.g. "main" or "master">
+```
+
+
+See: https://stackoverflow.com/questions/76945493/how-do-i-format-all-commits-in-a-branch/76945494#76945494
 
 ## Git internals (advanced)
 
