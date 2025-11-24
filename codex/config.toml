@@ -1,2 +1,5 @@
 # https://github.com/openai/codex/blob/main/docs/config.md
 notify = ["python3", "/Users/malthejorgensen/.codex/notifier.py"]
+
+[features]
+web_search_request = true
