@@ -29,6 +29,11 @@ git rebase \
   --exec '<formatting/linting command here>; git add --update; git commit --amend --no-edit' <base branch, e.g. "main" or "master">
 ```
 
+**WARNING:** Using `cd <some directory` in `--exec` is _really_ dangerous. It will somehow
+remove all files from the commit and you can't use `git rebase --abort` to get out.
+If you end up in this situation do `git add (git ls-tree -r --name-only main)` and
+then `git rebase --abort`. But maybe start by not getting into that situation in
+the first place (by keeping `cd`) out of your `--exec`.
 
 See: https://stackoverflow.com/questions/76945493/how-do-i-format-all-commits-in-a-branch/76945494#76945494
 
