@@ -1,2 +1,2 @@
 # https://github.com/openai/codex/blob/main/docs/config.md
-notify = ["python3", "~/.codex/notifier.py"]
+notify = ["python3", "/Users/malthejorgensen/.codex/notifier.py"]
