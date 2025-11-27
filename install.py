@@ -108,7 +108,7 @@ def check_file(full_path_source, full_path_target, verbose):
     if not os.path.islink(full_path_target):
         if verbose:
             print(
-                '%s exists but is not a symlink.' % (pretty_path(full_path_target),)
+                u'❌ %s exists but is not a symlink.' % (pretty_path(full_path_target),)
             )
         return False
 
@@ -116,7 +116,7 @@ def check_file(full_path_source, full_path_target, verbose):
     if current_symlink_target != full_path_source:
         if verbose:
             print(
-                '%s is a symlink, but points to %s. Expected %s'
+                u'❓ %s is a symlink, but points to %s. Expected %s'
                 % (
                     pretty_path(full_path_target),
                     pretty_path(current_symlink_target),
@@ -128,7 +128,7 @@ def check_file(full_path_source, full_path_target, verbose):
     if current_symlink_target == full_path_source:
         if verbose:
             print(
-                '%s is a symlink correctly pointing to %s'
+                u'✅ %s is a symlink correctly pointing to %s'
                 % (pretty_path(full_path_target), pretty_path(full_path_source))
             )
         return True
@@ -302,6 +302,6 @@ for app_dir in app_dirs:
 
     if args.check:
         if is_installed:
-            print('✅ %s' % app_dir)
+            print(u'✅ %s' % app_dir)
         else:
-            print('❌ %s' % app_dir)
+            print(u'❌ %s' % app_dir)
