@@ -17,6 +17,12 @@ except NameError:
     pass
 
 
+def pretty_path(path: str) -> str:
+    user_home = os.path.expanduser('~')
+
+    return path.replace(user_home, '~')
+
+
 def parse_path(path, path_app_dir):
     if path.startswith('./'):
         return os.path.join(path_app_dir, path[2:])
@@ -41,12 +47,13 @@ def ensure_dir_exists(path):
     for path in paths:
         if not os.path.exists(path):
             yesno = input(
-                '`%s` doesn\'t exist - do you want to create it? (Yes/No) ' % path
+                '`%s` doesn't exist - do you want to create it? (Yes/No) '
+                % pretty_path(path)
             )
             if yesno.lower() == 'yes':
                 os.mkdir(path)
             else:
-                print('Not creating `%s`' % path)
+                print('Not creating `%s`' % pretty_path(path))
                 return False
 
     return True
@@ -54,7 +61,10 @@ def ensure_dir_exists(path):
 
 def create_symlink(source_path, target_path, replace_only=False):
     if replace_only and not os.path.exists(target_path):
-        print('%s does not exist. Skipping due to `--replace-only`' % target_path)
+        print(
+            '%s does not exist. Skipping due to `--replace-only`'
+            % pretty_path(target_path)
+        )
         return
 
     # If `target_path` ends in a "/" (to indicate a directory) then
@@ -63,7 +73,8 @@ def create_symlink(source_path, target_path, replace_only=False):
 
     if os.path.exists(target_path):
         yesno = input(
-            '`%s` exists - do you want to overwrite it? (Yes/No) ' % target_path
+            '`%s` exists - do you want to overwrite it? (Yes/No) '
+            % pretty_path(target_path)
         )
         if yesno == 'Yes':
             if os.path.islink(target_path):
@@ -76,7 +87,10 @@ def create_symlink(source_path, target_path, replace_only=False):
             return
 
     if ensure_dir_exists(target_path):
-        print('Symlinking %s to %s' % (full_path_source, full_path_target))
+        print(
+            'Symlinking %s to %s'
+            % (pretty_path(full_path_source), pretty_path(full_path_target))
+        )
         os.symlink(source_path, target_path)
 
 
@@ -84,16 +98,18 @@ def check_file(full_path_source, full_path_target, verbose):
     # type: (str, str, bool) -> bool
     if not os.path.exists(full_path_target):
         if verbose:
-            print('%s does not exist.' % (full_path_target,))
+            print('%s does not exist.' % (pretty_path(full_path_target),))
         return False
 
-    # Strip ending "/" as symlink operations don't work with paths ending in "/"
+    # Strip ending '/' as symlink operations don't work with paths ending in '/'
     if full_path_target.endswith('/'):
         full_path_target = full_path_target.rstrip('/')
 
     if not os.path.islink(full_path_target):
         if verbose:
-            print('%s exists but is not a symlink.' % (full_path_target,))
+            print(
+                '%s exists but is not a symlink.' % (pretty_path(full_path_target),)
+            )
         return False
 
     current_symlink_target = os.readlink(full_path_target)
@@ -101,7 +117,11 @@ def check_file(full_path_source, full_path_target, verbose):
         if verbose:
             print(
                 '%s is a symlink, but points to %s. Expected %s'
-                % (full_path_target, current_symlink_target, full_path_source)
+                % (
+                    pretty_path(full_path_target),
+                    pretty_path(current_symlink_target),
+                    pretty_path(full_path_source),
+                )
             )
         return False
 
@@ -109,7 +129,7 @@ def check_file(full_path_source, full_path_target, verbose):
         if verbose:
             print(
                 '%s is a symlink correctly pointing to %s'
-                % (full_path_target, full_path_source)
+                % (pretty_path(full_path_target), pretty_path(full_path_source))
             )
         return True
 
@@ -121,14 +141,20 @@ def import_file(full_path_source, full_path_target):
     full_path_target += '.import'
 
     if not os.path.exists(full_path_source):
-        print('%s does not exist. Not importing.' % (full_path_source,))
+        print('%s does not exist. Not importing.' % (pretty_path(full_path_source),))
         return
 
     if os.path.exists(full_path_target):
-        print('%s already exist. Import would overwrite. Skipping.' % (full_path_target,))
+        print(
+            '%s already exist. Import would overwrite. Skipping.'
+            % (pretty_path(full_path_target),)
+        )
         return
 
-    print('Copying %s to %s' % (full_path_source, full_path_target))
+    print(
+        'Copying %s to %s'
+        % (pretty_path(full_path_source), pretty_path(full_path_target))
+    )
     if os.path.isdir(full_path_source):
         shutil.copytree(
             full_path_source,
@@ -145,22 +171,31 @@ def import_file(full_path_source, full_path_target):
 def uninstall_file(full_path_source, full_path_target):
     # type: (str, str) -> None
     if not os.path.exists(full_path_target):
-        print('%s does not exist. Not uninstalling.' % (full_path_target,))
+        print('%s does not exist. Not uninstalling.' % (pretty_path(full_path_target),))
         return
 
     if not os.path.islink(full_path_target):
-        print('%s is not a symlink. Not overwriting.' % (full_path_target,))
+        print(
+            '%s is not a symlink. Not overwriting.' % (pretty_path(full_path_target),)
+        )
         return
 
     current_symlink_target = os.readlink(full_path_target)
     if current_symlink_target != full_path_source:
         print(
             '%s points to %s. Expected %s. Not overwriting.'
-            % (full_path_target, current_symlink_target, full_path_source)
+            % (
+                pretty_path(full_path_target),
+                pretty_path(current_symlink_target),
+                pretty_path(full_path_source),
+            )
         )
         return
 
-    print('Copying %s to %s' % (full_path_source, full_path_target))
+    print(
+        'Copying %s to %s'
+        % (pretty_path(full_path_source), pretty_path(full_path_target))
+    )
     # Even with `follow_symlinks=False` `shutil.copyfile`/`shutil.copy2` will
     # still raise `SameFileError` when the target is a symlink pointing to the
     # source. Therefore, we have to remove the target first.
@@ -241,7 +276,7 @@ for app_dir in app_dirs:
                 full_path_source = parse_path(file['source'], path_app_dir)
                 full_path_target = parse_path(file['target'], path_app_dir)
                 if not os.path.exists(full_path_source) and not args._import:
-                    print('"%s" was not found' % (full_path_source, ))
+                    print('"%s" was not found' % (pretty_path(full_path_source),))
                     continue
 
                 if args.check:
