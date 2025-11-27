@@ -442,6 +442,9 @@ fish_add_path -g "$HOME/.local/bin"
 # cargo
 fish_add_path -g "$HOME/.cargo/bin"
 
+# Go / golang
+fish_add_path -g "$HOME/go/bin"
+
 # rbenv
 #fish_add_path -g "$HOME/.rbenv/shims"
 
