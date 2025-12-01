@@ -62,7 +62,7 @@ def parse_git_tree_file(contents: bytes):
     return matches
 
 
-def main(file: str, all_objects: bool):
+def main(file: str, all_objects: bool, write_to_directory: str | None = None):
     git_dir = find_matching_parent_dir(".git")
     object_files = run_cmd(f"find {git_dir}/objects -type f").strip().split("\n")
     objects = [
@@ -107,20 +107,32 @@ def main(file: str, all_objects: bool):
         for filename, hash in files:
             if filename == file_bytes:
                 matches.add(hash.hex())
+    print(f"Found {len(matches)} matches in `.git/objects/`")
 
-    # Print matches
-    print(f"Found {len(matches)} in `.git/objects/`")
-    for object in matches:
-        object_content = run_cmd(f"git cat-file -p {object}")
-        print(f"========================== {object} ==========================")
-        print(object_content)
+    if write_to_directory:
+        for object in matches:
+            # Get `file` extension
+            basename, ext = os.path.splitext(file)
+            filename = f"{basename}.{object}.{ext}"
+            with open(os.path.join(write_to_directory, filename), "wb") as f:
+                object_content = run_cmd(f"git cat-file -p {object}", text=False)
+                f.write(object_content)
+    else:
+        # Print matches
+        for object in matches:
+            object_content = run_cmd(f"git cat-file -p {object}")
+            print(f"========================== {object} ==========================")
+            print(object_content)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("Searches .git/objects for a particular file")
     parser.add_argument("file", nargs="?", help="File to search for in git objects")
     parser.add_argument("--all-objects", action="store_true", help="All objects")
+    parser.add_argument(
+        "-w", "--write", help="Write found objects to files the given directory"
+    )
 
     args = parser.parse_args()
 
-    main(file=args.file, all_objects=args.all_objects)
+    main(file=args.file, all_objects=args.all_objects, write_to_directory=args.write)
