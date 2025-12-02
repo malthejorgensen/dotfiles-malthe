@@ -11,6 +11,20 @@ after that initial call in the shims.
 ### Currently used hooks (non-shims)
 - `pre-push`: Checks for "!", "fixup" and "WIP" in commits before pushing
 
+## Stacked PRs / diffs / branches
+A "cheap" way to get Stacked PRs is to use the `--update-refs` flag to
+on `git rebase`. This will update parent branches (higher up in the
+stack automatically).
+
+What you need to do is a `git rebase --update-refs` from the top-most branch.
+So if the stack is `new-landing-page-ab-test`, `new-landing-page`, `main`
+you want to rebase at `new-landing-page-ab-test` and then you'll automatically
+have  `new-landing-page` be updated.
+
+This is now set as a global git setting, so it's implicitly passed on every rebase.
+
+[Source](https://medium.com/@bruce.ho98/a-better-way-to-rebase-stacked-prs-aa9b4dc600f1).
+
 ## Tips & Tricks
 
 ### Exit vim with non-zero (error) exit code

@@ -46,3 +46,7 @@
 	defaultBranch = main
 [pull]
 	ff = only
+[rebase]
+  # This is a "cheap" way to have stacked PRs. It's equivalent of always
+  # passing --update-refs to `git rebase`
+	updateRefs = true
