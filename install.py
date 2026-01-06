@@ -47,7 +47,7 @@ def ensure_dir_exists(path):
     for path in paths:
         if not os.path.exists(path):
             yesno = input(
-                '`%s` doesn't exist - do you want to create it? (Yes/No) '
+                '`%s` doesn\'t exist - do you want to create it? (Yes/No) '
                 % pretty_path(path)
             )
             if yesno.lower() == 'yes':
