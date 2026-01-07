@@ -59,7 +59,8 @@ def ensure_dir_exists(path):
     return True
 
 
-def create_symlink(source_path, target_path, replace_only=False):
+def create_symlink(source_path, target_path, replace_only=False, should_force=False):
+    # type: (str, str, bool, bool) -> None
     if replace_only and not os.path.exists(target_path):
         print(
             '%s does not exist. Skipping due to `--replace-only`'
@@ -72,10 +73,13 @@ def create_symlink(source_path, target_path, replace_only=False):
     target_path = target_path.rstrip('/')
 
     if os.path.exists(target_path):
-        yesno = input(
-            '`%s` exists - do you want to overwrite it? (Yes/No) '
-            % pretty_path(target_path)
-        )
+        if should_force:
+            yesno = 'Yes'
+        else:
+            yesno = input(
+                '`%s` exists - do you want to overwrite it? (Yes/No) '
+                % pretty_path(target_path)
+            )
         if yesno == 'Yes':
             if os.path.islink(target_path):
                 os.remove(target_path)
@@ -167,22 +171,33 @@ def import_file(full_path_source, full_path_target):
             follow_symlinks=False,
         )
 
-def export_file(full_path_source, full_path_target):
-    # type: (str, str) -> None
+def export_file(full_path_source, full_path_target, should_force=False):
+    # type: (str, str, bool) -> None
     if not os.path.exists(full_path_source):
         print('Source "%s" does not exist. Not exporting.' % (pretty_path(full_path_source),))
         return
 
+    does_exist = False
+    str_overwritten = ''
     if os.path.exists(full_path_target):
-        print(
-            'Target "%s" already exist. Export would overwrite. Skipping.'
-            % (pretty_path(full_path_target),)
-        )
-        return
+        does_exist = True
+        str_overwritten = ' (overwritten)'
+        if not should_force:
+            print(
+                'Target "%s" already exist. Export would overwrite. Skipping.'
+                % (pretty_path(full_path_target),)
+            )
+            return
 
     print(
-        'Exporting %s to %s' % (pretty_path(full_path_source), pretty_path(full_path_target))
+        'Exporting %s to %s%s' % (pretty_path(full_path_source), pretty_path(full_path_target), str_overwritten)
     )
+    # Even with `follow_symlinks=False` `shutil.copyfile`/`shutil.copy2` will
+    # still raise `SameFileError` when the target is a symlink pointing to the
+    # source. Therefore, we have to remove the target first.
+    if should_force and does_exist:
+        os.remove(full_path_target)
+
     if os.path.isdir(full_path_source):
         shutil.copytree(
             full_path_source,
@@ -196,40 +211,49 @@ def export_file(full_path_source, full_path_target):
         )
 
 
-def uninstall_file(full_path_source, full_path_target):
-    # type: (str, str) -> None
+def uninstall_file(full_path_source, full_path_target, should_force=False):
+    # type: (str, str, bool) -> None
     if not os.path.exists(full_path_target):
         print('%s does not exist. Not uninstalling.' % (pretty_path(full_path_target),))
         return
 
-    if not os.path.islink(full_path_target):
-        print(
-            '%s is not a symlink. Not uninstalling.' % (pretty_path(full_path_target),)
-        )
-        return
+    is_symlink = os.path.islink(full_path_target)
 
-    current_symlink_target = os.readlink(full_path_target)
-    if current_symlink_target != full_path_source:
-        print(
-            '%s points to %s. Expected %s. Not removing.'
-            % (
-                pretty_path(full_path_target),
-                pretty_path(current_symlink_target),
-                pretty_path(full_path_source),
+    if not should_force:
+        if not is_symlink:
+            print(
+                '%s is not a symlink. Not uninstalling.' % (pretty_path(full_path_target),)
             )
-        )
-        return
+            return
+
+        current_symlink_target = os.readlink(full_path_target)
+        if current_symlink_target != full_path_source:
+            print(
+                '%s points to %s. Expected %s. Not removing.'
+                % (
+                    pretty_path(full_path_target),
+                    pretty_path(current_symlink_target),
+                    pretty_path(full_path_source),
+                )
+            )
+            return
 
     print(
         'Removing %s' % pretty_path(full_path_target)
     )
-    os.unlink(full_path_target)
+    if is_symlink:
+        os.remove(full_path_target)
+    else:
+        shutil.rmtree(full_path_target)
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-v', '--verbose', action='count', default=0, dest='verbosity')
 parser.add_argument(
     '-a', '--all', action='store_true', help='Install dotfiles for all apps'
+)
+parser.add_argument(
+    '-f', '--force', action='store_true', help='Overwrite existing files'
 )
 parser.add_argument(
     '--check',
@@ -303,11 +327,11 @@ for app_dir in app_dirs:
                         full_path_source, full_path_target, verbose=args.verbosity > 0
                     )
                 elif args.uninstall:
-                    uninstall_file(full_path_source, full_path_target)
+                    uninstall_file(full_path_source, full_path_target, should_force=args.force)
                 elif args._import:
                     import_file(full_path_target, full_path_source)
                 elif args._export:
-                    export_file(full_path_source, full_path_target)
+                    export_file(full_path_source, full_path_target, should_force=args.force)
                 else:
                     is_installed = check_file(
                         full_path_source, full_path_target, verbose=True
@@ -317,6 +341,7 @@ for app_dir in app_dirs:
                             full_path_source,
                             full_path_target,
                             replace_only=args.replace_only,
+                            should_force=args.force,
                         )
             else:
                 print('Unknown type: ' + file['type'])
