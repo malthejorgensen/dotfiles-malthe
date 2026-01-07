@@ -167,6 +167,34 @@ def import_file(full_path_source, full_path_target):
             follow_symlinks=False,
         )
 
+def export_file(full_path_source, full_path_target):
+    # type: (str, str) -> None
+    if not os.path.exists(full_path_source):
+        print('Source "%s" does not exist. Not exporting.' % (pretty_path(full_path_source),))
+        return
+
+    if os.path.exists(full_path_target):
+        print(
+            'Target "%s" already exist. Export would overwrite. Skipping.'
+            % (pretty_path(full_path_target),)
+        )
+        return
+
+    print(
+        'Exporting %s to %s' % (pretty_path(full_path_source), pretty_path(full_path_target))
+    )
+    if os.path.isdir(full_path_source):
+        shutil.copytree(
+            full_path_source,
+            full_path_target,
+        )
+    else:
+        shutil.copy2(
+            full_path_source,
+            full_path_target,
+            follow_symlinks=False,
+        )
+
 
 def uninstall_file(full_path_source, full_path_target):
     # type: (str, str) -> None
@@ -218,6 +246,12 @@ parser.add_argument(
     action='store_true',
     dest='_import',
     help='Import existing dotfiles for selected apps (pass --all to select all apps)',
+)
+parser.add_argument(
+    '--export',
+    action='store_true',
+    dest='_export',
+    help='Export dotfiles for selected apps (pass --all to select all apps)',
 )
 parser.add_argument(
     '--uninstall',
@@ -272,6 +306,8 @@ for app_dir in app_dirs:
                     uninstall_file(full_path_source, full_path_target)
                 elif args._import:
                     import_file(full_path_target, full_path_source)
+                elif args._export:
+                    export_file(full_path_source, full_path_target)
                 else:
                     is_installed = check_file(
                         full_path_source, full_path_target, verbose=True
