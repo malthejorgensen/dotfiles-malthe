@@ -323,9 +323,10 @@ for app_dir in app_dirs:
                     continue
 
                 if args.check:
-                    is_installed = is_installed and check_file(
+                    is_file_correct_installed = check_file(
                         full_path_source, full_path_target, verbose=args.verbosity > 0
                     )
+                    is_installed = is_installed and is_file_correct_installed
                 elif args.uninstall:
                     uninstall_file(full_path_source, full_path_target, should_force=args.force)
                 elif args._import:
