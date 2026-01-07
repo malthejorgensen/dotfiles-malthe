@@ -102,7 +102,7 @@ def check_file(full_path_source, full_path_target, verbose):
     # type: (str, str, bool) -> bool
     if not os.path.exists(full_path_target):
         if verbose:
-            print('%s does not exist.' % (pretty_path(full_path_target),))
+            print(u'❌ %s does not exist.' % (pretty_path(full_path_target),))
         return False
 
     # Strip ending '/' as symlink operations don't work with paths ending in '/'
