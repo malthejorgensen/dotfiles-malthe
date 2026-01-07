@@ -5,7 +5,6 @@
 	# See: http://stackoverflow.com/a/17045911/118608
 [core]
 	editor = /usr/bin/vim
-	excludesfile = ~/.gitignore_global
 	hooksPath = ~/.git-hooks
 	mergetool = sublime
 	# mergetool = gvimdiff

@@ -3,13 +3,13 @@
     "comment": "",
     "type": "symlink",
     "source": "./gitconfig",
-    "target": "~/.gitconfig"
+    "target": "~/.config/git/config"
   },
   {
     "comment": "",
     "type": "symlink",
     "source": "./gitignore_global",
-    "target": "~/.gitignore_global"
+    "target": "~/.config/git/ignore"
   },
   {
     "comment": "",
