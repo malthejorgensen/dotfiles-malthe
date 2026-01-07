@@ -176,14 +176,14 @@ def uninstall_file(full_path_source, full_path_target):
 
     if not os.path.islink(full_path_target):
         print(
-            '%s is not a symlink. Not overwriting.' % (pretty_path(full_path_target),)
+            '%s is not a symlink. Not uninstalling.' % (pretty_path(full_path_target),)
         )
         return
 
     current_symlink_target = os.readlink(full_path_target)
     if current_symlink_target != full_path_source:
         print(
-            '%s points to %s. Expected %s. Not overwriting.'
+            '%s points to %s. Expected %s. Not removing.'
             % (
                 pretty_path(full_path_target),
                 pretty_path(current_symlink_target),
@@ -193,24 +193,9 @@ def uninstall_file(full_path_source, full_path_target):
         return
 
     print(
-        'Copying %s to %s'
-        % (pretty_path(full_path_source), pretty_path(full_path_target))
+        'Removing %s' % pretty_path(full_path_target)
     )
-    # Even with `follow_symlinks=False` `shutil.copyfile`/`shutil.copy2` will
-    # still raise `SameFileError` when the target is a symlink pointing to the
-    # source. Therefore, we have to remove the target first.
     os.unlink(full_path_target)
-    if os.path.isdir(full_path_source):
-        shutil.copytree(
-            full_path_source,
-            full_path_target,
-        )
-    else:
-        shutil.copy2(
-            full_path_source,
-            full_path_target,
-            follow_symlinks=False,
-        )
 
 
 parser = argparse.ArgumentParser()
