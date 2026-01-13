@@ -1,3 +1,4 @@
+# Run `brew leaves` to produce this list
 # Essentials
 curl
 git
@@ -29,8 +30,8 @@ ast-grep
 pstree
 xsv
 
-# Casks
-alfred
+# Apps / Casks
+# alfred
 caffeine
 gitx
 karabiner-elements

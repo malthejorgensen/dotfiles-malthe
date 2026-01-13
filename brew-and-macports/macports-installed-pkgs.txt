@@ -1,10 +1,44 @@
 # Run `port installed requested` to produce this list
-tmux-pasteboard # `reattach-to-user-namespace`-command
-fd
+# Essentials
+curl
+git
+
+# My CLI setup
 fish
+neovim
+mise
 tig
+tmux
+vim
+uv
+
+# Modern "UNIX" tools
+fd
 fzf
 gron
 ripgrep
+sd
+
+# macOS CLI
+tmux-pasteboard # `reattach-to-user-namespace`-command
+
+# Vendors 
+awscli
+gh
+
+# More CLI-foo
+ast-grep
+pstree
+xsv
+
+# Apps / Casks
 HexFiend
 ImageMagick
+# alfred
+# caffeine
+gitx
+karabiner-elements
+# sublime-text
+wezterm
+qlmarkdown
+# google-chrome
