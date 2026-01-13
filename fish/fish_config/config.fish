@@ -39,6 +39,12 @@ if [ -e /opt/homebrew/bin/brew ]
   eval (/opt/homebrew/bin/brew shellenv)
 end
 
+# Enable Macports (if installed)
+if [ -e /opt/local/bin/port ]
+  fish_add_path -g "/opt/local/bin"
+  fish_add_path -g "/opt/local/sbin"
+end
+
 # Add ~/bin to $PATH
 fish_add_path -g "$HOME/bin"
 
