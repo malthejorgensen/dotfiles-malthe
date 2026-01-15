@@ -3,3 +3,9 @@ notify = ["python3", "/Users/malthejorgensen/.codex/notifier.py"]
 
 [features]
 web_search_request = true
+
+[sandbox_workspace_write]
+# Fixes `uv` when running in sandbox (system-configuration / dynamic_store.rs)
+# See: https://github.com/openai/codex/issues/5914#issuecomment-3505687500
+network_access = true
+
