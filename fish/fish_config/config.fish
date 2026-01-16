@@ -522,3 +522,12 @@ function codex-local
   end
   env CODEX_HOME="$CODEX_DIR" codex $argv
 end
+
+# pnpm
+if [ command -v pnpm ]
+  set -gx PNPM_HOME "/Users/malthejorgensen/Library/pnpm"
+  if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+  end
+end
+# pnpm end
