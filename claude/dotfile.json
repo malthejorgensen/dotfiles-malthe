@@ -10,5 +10,11 @@
     "type": "symlink",
     "source": "./hooks/",
     "target": "~/.claude/hooks/"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./skills/",
+    "target": "~/.claude/skills/"
   }
 ]
