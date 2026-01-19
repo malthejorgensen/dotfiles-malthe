@@ -520,7 +520,11 @@ function codex-local
       cp ~/dotfiles/codex/config.toml "$CODEX_DIR/config.toml"
     end
   end
-  env CODEX_HOME="$CODEX_DIR" codex $argv
+  # Codex always uses `zsh` on macOS, but our environment says `$SHELL=/opt/homebrew/bin/fish`
+  # which in turn confuses Homebrew which is called in ~/.zprofile for `eval $(brew shellenv)`
+  # 
+  # See: https://github.com/openai/codex/issues/3823
+  env SHELL=/bin/zsh CODEX_HOME="$CODEX_DIR" codex $argv
 end
 
 # pnpm
