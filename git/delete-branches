@@ -1,0 +1,54 @@
+#!/usr/bin/env fish
+
+# Get list of local branches (excluding current branch marked with *)
+set branches (git branch --format='%(refname:short)' 2>/dev/null)
+
+if test -z "$branches"
+    echo "No branches found or not in a git repository."
+    exit 1
+end
+
+# Use fzf for multi-select
+# - x to toggle selection
+# - Enter to confirm
+# - Esc/Ctrl-C to cancel
+# - Up/Down and Ctrl-N/Ctrl-P for navigation (default fzf behavior)
+set selected (printf '%s\n' $branches | fzf --multi \
+    --header='Select branches to delete (x=toggle, Enter=confirm, Esc=cancel)' \
+    --marker='x ' \
+    --bind='x:toggle' \
+    --bind='ctrl-c:abort' \
+    --bind='esc:abort')
+
+# Check if user cancelled or nothing selected
+if test $status -ne 0; or test -z "$selected"
+    echo "Cancelled. No branches deleted."
+    exit 0
+end
+
+# Show selected branches and ask for confirmation
+echo "Branches selected for deletion:"
+for branch in $selected
+    echo "  - $branch"
+end
+
+read -l -P "Delete these branches? [y/N] " confirm
+
+if test "$confirm" = "y"; or test "$confirm" = "Y"
+    for branch in $selected
+        echo "Deleting $branch..."
+        git branch -d "$branch"
+        # If branch is not fully merged, ask about force delete
+        if test $status -ne 0
+            read -l -P "Branch '$branch' is not fully merged. Force delete? [y/N] " force
+            if test "$force" = "y"; or test "$force" = "Y"
+                git branch -D "$branch"
+            else
+                echo "Skipped $branch"
+            end
+        end
+    end
+    echo "Done."
+else
+    echo "Cancelled. No branches deleted."
+end
