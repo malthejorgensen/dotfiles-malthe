@@ -2,12 +2,6 @@
   {
     "comment": "",
     "type": "symlink",
-    "source": "./git-unconflict",
-    "target": "~/bin/git-unconflict"
-  },
-  {
-    "comment": "",
-    "type": "symlink",
     "source": "./remove_bom",
     "target": "~/bin/remove_bom"
   },
@@ -16,12 +10,6 @@
     "type": "symlink",
     "source": "./html-prettify",
     "target": "~/bin/html-prettify"
-  },
-  {
-    "comment": "",
-    "type": "symlink",
-    "source": "./delete-merged-branches",
-    "target": "~/bin/delete-merged-branches"
   },
   {
     "comment": "Sublime Text `subl`-command",

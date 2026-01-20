@@ -34,5 +34,17 @@
     "type": "symlink",
     "source": "./delete-branches",
     "target": "~/bin/delete-branches"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./delete-merged-branches",
+    "target": "~/bin/delete-merged-branches"
+  },
+  {
+    "comment": "",
+    "type": "symlink",
+    "source": "./git-unconflict",
+    "target": "~/bin/git-unconflict"
   }
 ]
