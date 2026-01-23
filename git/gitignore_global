@@ -19,5 +19,7 @@
 # OS X folder config files
 .DS_Store
 
+# Codex (`git add -f .codex/config.toml` to override for a repository)
+.codex
 
 **/.claude/settings.local.json
