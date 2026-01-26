@@ -9,3 +9,5 @@ web_search_request = true
 # See: https://github.com/openai/codex/issues/5914#issuecomment-3505687500
 network_access = true
 
+[tui]
+animations = false          # Don't animate text in the TUI (makes it possible to copy/paste login URL)
