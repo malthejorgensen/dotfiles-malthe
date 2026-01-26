@@ -2,6 +2,8 @@
 notify = ["python3", "/Users/malthejorgensen/.codex/notifier.py"]
 model = "gpt-5.2-codex"
 
+sandbox_mode = "workspace-write"
+
 [features]
 web_search_request = true
 
