@@ -1,5 +1,6 @@
 # https://github.com/openai/codex/blob/main/docs/config.md
 notify = ["python3", "/Users/malthejorgensen/.codex/notifier.py"]
+model = "gpt-5.2-codex"
 
 [features]
 web_search_request = true
