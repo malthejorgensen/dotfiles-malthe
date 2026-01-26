@@ -1,8 +1,17 @@
-# https://github.com/openai/codex/blob/main/docs/config.md
 notify = ["python3", "/Users/malthejorgensen/.codex/notifier.py"]
 model = "gpt-5.2-codex"
 
+# See:
+# - https://developers.openai.com/codex/config-basic/
+# - https://developers.openai.com/codex/security
+# - https://github.com/openai/codex/blob/main/docs/config.md
+
+# The two options below are equivalent to executing as `codex --full-auto`
+#
+# Default to writeable sandbox
 sandbox_mode = "workspace-write"
+# Sane approval policy
+approval_policy = "on-request" # Other options: "untrusted", "never"
 
 [features]
 web_search_request = true       # Allow the model to request web searches
