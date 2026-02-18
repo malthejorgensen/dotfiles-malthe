@@ -12,9 +12,10 @@ model = "gpt-5.2-codex"
 sandbox_mode = "workspace-write"
 # Sane approval policy
 approval_policy = "on-request" # Other options: "untrusted", "never"
+# Allow the model to request web searches
+web_search = "cached"
 
 [features]
-web_search_request = true       # Allow the model to request web searches
 shell_snapshot = true           # Speed up repeated commands
 undo = false                    # No git ghost commits
 
