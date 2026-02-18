@@ -61,7 +61,8 @@ def ensure_dir_exists(path):
 
 def create_symlink(source_path, target_path, replace_only=False, should_force=False):
     # type: (str, str, bool, bool) -> None
-    if replace_only and not os.path.exists(target_path):
+    # Use `.lexists()` to make sure we don't follow the symlink
+    if replace_only and not os.path.lexists(target_path):
         print(
             '%s does not exist. Skipping due to `--replace-only`'
             % pretty_path(target_path)
@@ -72,7 +73,7 @@ def create_symlink(source_path, target_path, replace_only=False, should_force=Fa
     # both `os.path.is_link()` and `os.symlink()` won't work so we strip it.
     target_path = target_path.rstrip('/')
 
-    if os.path.exists(target_path):
+    if os.path.lexists(target_path):
         if should_force:
             yesno = 'Yes'
         else:
@@ -100,7 +101,7 @@ def create_symlink(source_path, target_path, replace_only=False, should_force=Fa
 
 def check_file(full_path_source, full_path_target, verbose):
     # type: (str, str, bool) -> bool
-    if not os.path.exists(full_path_target):
+    if not os.path.lexists(full_path_target):
         if verbose:
             print(u'❌ %s does not exist.' % (pretty_path(full_path_target),))
         return False
@@ -148,7 +149,7 @@ def import_file(full_path_source, full_path_target):
         print('%s does not exist. Not importing.' % (pretty_path(full_path_source),))
         return
 
-    if os.path.exists(full_path_target):
+    if os.path.lexists(full_path_target):
         print(
             '%s already exist. Import would overwrite. Skipping.'
             % (pretty_path(full_path_target),)
@@ -179,7 +180,7 @@ def export_file(full_path_source, full_path_target, should_force=False):
 
     does_exist = False
     str_overwritten = ''
-    if os.path.exists(full_path_target):
+    if os.path.lexists(full_path_target):
         does_exist = True
         str_overwritten = ' (overwritten)'
         if not should_force:
@@ -213,7 +214,7 @@ def export_file(full_path_source, full_path_target, should_force=False):
 
 def uninstall_file(full_path_source, full_path_target, should_force=False):
     # type: (str, str, bool) -> None
-    if not os.path.exists(full_path_target):
+    if not os.path.lexists(full_path_target):
         print('%s does not exist. Not uninstalling.' % (pretty_path(full_path_target),))
         return
 
