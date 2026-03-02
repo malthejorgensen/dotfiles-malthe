@@ -2,11 +2,13 @@
 
 function delete_merged_branches
     # Parse arguments
-    set -l check_closed false
+    set -l checks local prs-merged prs-closed
     for arg in $argv
         switch $arg
+            case --local
+                set checks local
             case --closed
-                set check_closed true
+                set checks prs-closed
             case '*'
                 echo "Unknown argument: $arg"
                 return 1
@@ -41,60 +43,72 @@ function delete_merged_branches
     echo "Current branch: $current_branch"
     echo
     
-    # Fetch latest from remote
-    echo "Fetching latest from remote..."
-    git fetch --prune
-    
-    set -l merged_branches
-    # Get branches merged into the default branch
-    echo
-    echo "Finding branches merged into $default_branch..."
-    set -l merged_branches (git branch --merged $default_branch | grep -v "^\*" | grep -v $default_branch | string trim)
-    
-    if test (count $merged_branches) -eq 0
-        echo "No merged branches found."
-    else
-        echo "Branches merged into $default_branch:"
-        for branch in $merged_branches
-            echo "  - $branch"
-        end
+    if contains prs-merged $checks; or contains prs-closed $checks
+      # Fetch latest from remote
+      echo "Fetching latest from remote..."
+      git fetch --prune
     end
     
-    # Check for branches with merged PRs (GitHub)
-    echo
-    echo "Checking for branches with merged PRs..."
-    set -l all_local_branches (git branch | grep -v "^\*" | string trim)
+    set -l merged_branches
     set -l pr_merged_branches
     set -l pr_closed_branches
 
-    if command -v gh >/dev/null 2>&1
-        for branch in $all_local_branches
-            # Skip if already in merged branches
-            if contains $branch $merged_branches
-                continue
-            end
+    # Get branches merged into the default branch
+    if contains local $checks
+        echo
+        echo "Finding branches merged into $default_branch..."
+        set merged_branches (git branch --merged $default_branch | grep -v "^\*" | grep -v $default_branch | string trim)
 
-            # Skip if default branch
-            if test "$default_branch" = "$branch"
-                continue
-            end
-
-            # Check if branch has an associated PR that's been merged
-            set -l pr_info (gh pr list --state merged --head $branch --json number,title,mergedAt 2>/dev/null)
-            if test -n "$pr_info" -a "$pr_info" != "[]"
-                set pr_merged_branches $pr_merged_branches $branch
-                echo "  - $branch (PR merged)"
-            else if test "$check_closed" = true
-                # Check if branch has an associated PR that's been closed (but not merged)
-                set -l closed_pr_info (gh pr list --state closed --head $branch --json number,title,closedAt 2>/dev/null)
-                if test -n "$closed_pr_info" -a "$closed_pr_info" != "[]"
-                    set pr_closed_branches $pr_closed_branches $branch
-                    echo "  - $branch (PR closed)"
-                end
+        if test (count $merged_branches) -eq 0
+            echo "No merged branches found."
+        else
+            echo "Branches merged into $default_branch:"
+            for branch in $merged_branches
+                echo "  - $branch"
             end
         end
-    else
-        echo "  GitHub CLI (gh) not found. Skipping PR check."
+    end
+
+    # Check for branches with merged/closed PRs (GitHub)
+    if contains prs-merged $checks; or contains prs-closed $checks
+        echo
+        echo "Checking for branches with merged PRs..."
+        set -l all_local_branches (git branch | grep -v "^\*" | string trim)
+
+        if command -v gh >/dev/null 2>&1
+            for branch in $all_local_branches
+                # Skip if already in merged branches
+                if contains $branch $merged_branches
+                    continue
+                end
+
+                # Skip if default branch
+                if test "$default_branch" = "$branch"
+                    continue
+                end
+
+                if contains prs-merged $checks
+                    # Check if branch has an associated PR that's been merged
+                    set -l pr_info (gh pr list --state merged --head $branch --json number,title,mergedAt 2>/dev/null)
+                    if test -n "$pr_info" -a "$pr_info" != "[]"
+                        set pr_merged_branches $pr_merged_branches $branch
+                        echo "  - $branch (PR merged)"
+                        continue
+                    end
+                end
+
+                if contains prs-closed $checks
+                    # Check if branch has an associated PR that's been closed (but not merged)
+                    set -l closed_pr_info (gh pr list --state closed --head $branch --json number,title,closedAt 2>/dev/null)
+                    if test -n "$closed_pr_info" -a "$closed_pr_info" != "[]"
+                        set pr_closed_branches $pr_closed_branches $branch
+                        echo "  - $branch (PR closed)"
+                    end
+                end
+            end
+        else
+            echo "  GitHub CLI (gh) not found. Skipping PR check."
+        end
     end
     
     # Combine all branches to delete
