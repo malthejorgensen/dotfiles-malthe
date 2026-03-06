@@ -1,4 +1,7 @@
 {
+  "env": {
+    "UV_OFFLINE": "1"
+  },
   "permissions": {
     "deny": [
       "Bash(git commit:*)",
