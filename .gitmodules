@@ -13,3 +13,6 @@
 [submodule "Sublime Text/DeleteFile"]
 	path = Sublime Text/DeleteFile
 	url = git@github.com:malthejorgensen/subl-DeleteFile.git
+[submodule "Sublime Text/Supermaven"]
+	path = Sublime Text/Supermaven
+	url = git@github.com:malthejorgensen/subl-Supermaven.git
