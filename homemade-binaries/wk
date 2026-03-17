@@ -1,0 +1,53 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = []
+# ///
+import random
+import string
+import subprocess
+import sys
+from pathlib import Path
+
+"""
+SPEC:
+
+`wk` is an executable `uv` script with hashbang line and all that:
+
+- creates a git worktree in `<git_repo_root>/.worktrees/<6 char lowercase alphanum>/`
+"""
+
+
+def main():
+    # Find git repo root
+    result = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        print("error: not inside a git repository", file=sys.stderr)
+        sys.exit(1)
+
+    repo_root = Path(result.stdout.strip())
+
+    # Generate 6-char random lowercase alphanumeric name
+    chars = string.ascii_lowercase + string.digits
+    name = "".join(random.choices(chars, k=6))
+
+    worktree_path = repo_root / ".worktrees" / name
+    worktree_path.parent.mkdir(exist_ok=True)
+
+    branch = sys.argv[1] if len(sys.argv) > 1 else None
+    if branch:
+        cmd = ["git", "worktree", "add", "-b", branch, str(worktree_path)]
+    else:
+        cmd = ["git", "worktree", "add", "--detach", str(worktree_path)]
+        print(
+            "Due to how `git worktree` works you are in a detached HEAD state."
+            "Run `git checkout -b <branch_name>` to get a branch :)"
+        )
+    subprocess.run(cmd, check=True)
+    print(worktree_path)
+
+
+if __name__ == "__main__":
+    main()

@@ -22,5 +22,11 @@
     "type": "symlink",
     "source": "/Applications/GitX.app/Contents/Resources/gitx",
     "target": "~/bin/gitx"
+  },
+  {
+    "comment": "`git worktree` helper",
+    "type": "symlink",
+    "source": "./wk",
+    "target": "~/bin/wk"
   }
 ]
