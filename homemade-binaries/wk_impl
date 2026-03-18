@@ -19,7 +19,31 @@ SPEC:
 """
 
 
+def cmd_delete():
+    # Find the common git dir — works from both main worktree and linked worktrees
+    result = subprocess.run(
+        ["git", "rev-parse", "--git-common-dir"], capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        print("error: not inside a git repository", file=sys.stderr)
+        sys.exit(1)
+
+    git_common_dir = Path(result.stdout.strip())
+    if not git_common_dir.is_absolute():
+        git_common_dir = Path.cwd() / git_common_dir
+    main_repo_root = git_common_dir.parent
+
+    subprocess.run(["git", "worktree", "remove", str(Path.cwd())], check=True)
+    print(main_repo_root)
+
+
 def main():
+    args = sys.argv[1:]
+
+    if args and args[0] == "delete":
+        cmd_delete()
+        return
+
     # Find git repo root
     result = subprocess.run(
         ["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True
@@ -37,7 +61,6 @@ def main():
     worktree_path = repo_root / ".worktrees" / name
     worktree_path.parent.mkdir(exist_ok=True)
 
-    args = sys.argv[1:]
     copy_claude = "--claude" in args
     if copy_claude:
         args.remove("--claude")
