@@ -4,6 +4,7 @@
 # dependencies = []
 # ///
 import random
+import shutil
 import string
 import subprocess
 import sys
@@ -36,9 +37,21 @@ def main():
     worktree_path = repo_root / ".worktrees" / name
     worktree_path.parent.mkdir(exist_ok=True)
 
-    branch = sys.argv[1] if len(sys.argv) > 1 else None
+    args = sys.argv[1:]
+    copy_claude = "--claude" in args
+    if copy_claude:
+        args.remove("--claude")
+
+    branch = args[0] if args else None
     if branch:
-        cmd = ["git", "worktree", "add", "-b", branch, str(worktree_path)]
+        branch_exists = subprocess.run(
+            ["git", "show-ref", "--verify", "--quiet", f"refs/heads/{branch}"],
+            capture_output=True,
+        ).returncode == 0
+        if branch_exists:
+            cmd = ["git", "worktree", "add", str(worktree_path), branch]
+        else:
+            cmd = ["git", "worktree", "add", "-b", branch, str(worktree_path)]
     else:
         cmd = ["git", "worktree", "add", "--detach", str(worktree_path)]
         print(
@@ -46,6 +59,25 @@ def main():
             "Run `git checkout -b <branch_name>` to get a branch :)"
         )
     subprocess.run(cmd, check=True)
+
+    if copy_claude:
+        claude_dir = Path.home() / ".claude" / "projects"
+        cwd = Path.cwd()
+        src = claude_dir / cwd.as_posix().replace("/", "-")
+        dst = claude_dir / worktree_path.as_posix().replace("/", "-")
+        if src.exists():
+            shutil.copytree(src, dst)
+            # Replace
+            for f in dst.rglob("*"):
+                if not f.is_file():
+                    continue
+                text = f.read_text(errors="replace")
+                updated = text.replace(f'"path": "{cwd}/', f'"path": "{worktree_path}/')
+                if updated != text:
+                    f.write_text(updated)
+        else:
+            print(f"warning: no Claude project found at {src}", file=sys.stderr)
+
     print(worktree_path)
 
 
